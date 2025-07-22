@@ -1,83 +1,103 @@
 <?php
-/*
-Plugin Name: Events Calendar Plugin
-Plugin URI: https://satori.com.au/
-Description: A lightweight events calendar with frontend submission support.
-Version: 1.0.0
-Author: Satori Graphics
-Author URI: https://satori.com.au/
-License: GPL2
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: events-calendar-plugin
-*/
 
-defined( 'ABSPATH' ) || exit;
+/**
+ * Plugin Name: Events Calendar Plugin
+ * Description: A lightweight, modular Events Calendar plugin for WordPress.
+ * Version: 1.0.0
+ * Author: Satori Graphics Pty Ltd
+ * Text Domain: satori-ec
+ */
 
-// ===============================
+defined('ABSPATH') || exit; // Exit if accessed directly
+
+// ----------------------------------------------
 // Define constants
-// ===============================
-define( 'EC_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'EC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+// ----------------------------------------------
+define('SATORI_EC_VERSION', '1.0.0');
+define('SATORI_EC_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('SATORI_EC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-// ===============================
-// Load plugin components
-// ===============================
-require_once EC_PLUGIN_PATH . 'includes/session.php';
-require_once EC_PLUGIN_PATH . 'includes/post-types.php';
-require_once EC_PLUGIN_PATH . 'includes/taxonomies.php';
-require_once EC_PLUGIN_PATH . 'includes/meta-boxes.php';
-require_once EC_PLUGIN_PATH . 'includes/form-fields.php';
-require_once EC_PLUGIN_PATH . 'includes/submission-form.php';
-require_once EC_PLUGIN_PATH . 'includes/form-handler.php';
-require_once EC_PLUGIN_PATH . 'includes/excerpt-override.php';
-require_once EC_PLUGIN_PATH . 'includes/template-loader.php';
-require_once EC_PLUGIN_PATH . 'includes/search-filter.php';
-require_once EC_PLUGIN_PATH . 'includes/shortcodes/class-ec-archive-shortcode.php';
+// ----------------------------------------------
+// Namespace and main plugin class
+// ----------------------------------------------
+namespace Satori_EC;
 
-// ===============================
-// Register custom query vars for shortcodes
-// ===============================
-function ec_register_shortcode_query_vars( $vars ) {
-    $vars[] = 'ec_shortcode_category';
-    $vars[] = 'ec_shortcode_view';
-    $vars[] = 'ec_shortcode_per_page';
-    return $vars;
-}
-add_filter( 'query_vars', 'ec_register_shortcode_query_vars' );
+final class Plugin
+{
 
-// ===============================
-// Enqueue plugin styles
-// ===============================
-function ec_enqueue_plugin_styles() {
-    global $post;
+    // ------------------------------------------
+    // Run plugin setup on init
+    // ------------------------------------------
+    public function __construct()
+    {
+        // Load core includes
+        $this->load_includes();
 
-    if (
-        is_singular( 'event' ) ||
-        is_post_type_archive( 'event' ) ||
-        ( isset( $post ) && has_shortcode( $post->post_content, 'event_submission_form' ) ) ||
-        ( isset( $post ) && has_shortcode( $post->post_content, 'ec_event_archive' ) )
-    ) {
+        // Hook into init or other WordPress actions as needed
+        add_action('init', [$this, 'register_post_type']);
+
+        // Register assets
+        add_action('wp_enqueue_scripts', [$this, 'register_assets']);
+    }
+
+    // ------------------------------------------
+    // Load modular files
+    // ------------------------------------------
+    private function load_includes()
+    {
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-archive-shortcode.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-form-handler.php';
+        // Add more includes here as needed
+    }
+
+    // ------------------------------------------
+    // Register custom post type (example stub)
+    // ------------------------------------------
+    public function register_post_type()
+    {
+        // Optional: register_event_post_type() or other logic
+    }
+
+    // ------------------------------------------
+    // Register CSS/JS assets
+    // ------------------------------------------
+    public function register_assets()
+    {
         wp_enqueue_style(
-            'ec-event-styles',
-            EC_PLUGIN_URL . 'assets/css/events-calendar-plugin.css',
+            'satori-ec-main',
+            SATORI_EC_PLUGIN_URL . 'assets/css/main.css',
             [],
-            '1.0.0'
+            SATORI_EC_VERSION
         );
     }
-}
-add_action( 'wp_enqueue_scripts', 'ec_enqueue_plugin_styles' );
 
-// ===============================
-// Customize excerpt length
-// ===============================
-function ec_custom_excerpt_length( $length ) {
-    return apply_filters( 'ec_excerpt_length', 30 );
-}
-add_filter( 'excerpt_length', 'ec_custom_excerpt_length', 999 );
+    // ------------------------------------------
+    // Plugin activation routine
+    // ------------------------------------------
+    public static function activate()
+    {
+        // Flush rewrite rules
+        flush_rewrite_rules();
+    }
 
-// ===============================
-// Register archive shortcode
-// ===============================
-if ( class_exists( 'EC_Archive_Shortcode' ) ) {
-    EC_Archive_Shortcode::register();
+    // ------------------------------------------
+    // Plugin deactivation routine (optional)
+    // ------------------------------------------
+    public static function deactivate()
+    {
+        flush_rewrite_rules();
+    }
 }
+
+// ----------------------------------------------
+// Instantiate the plugin
+// ----------------------------------------------
+add_action('plugins_loaded', function () {
+    new Plugin();
+});
+
+// ----------------------------------------------
+// Register activation & deactivation hooks
+// ----------------------------------------------
+register_activation_hook(__FILE__, ['\Satori_EC\Plugin', 'activate']);
+register_deactivation_hook(__FILE__, ['\Satori_EC\Plugin', 'deactivate']);
