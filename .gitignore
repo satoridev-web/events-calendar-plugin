@@ -1,0 +1,40 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code settings
+.vscode/
+
+# SCSS cache
+.sass-cache/
+*.sass-cache/
+
+# Compiled CSS (optional - keep only if you compile main.css separately)
+assets/css/main.css
+assets/css/**/*.css.map
+
+# Node modules (if you're using a build process)
+node_modules/
+
+# Log files
+*.log
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+
+# PHPStorm or other IDE junk
+.idea/
+*.iml
+
+# Composer dependencies (if used)
+vendor/
+
+# Ignore uploads or generated media (if applicable)
+uploads/
+media/
+
+# Git itself
+.git/
