@@ -63,11 +63,25 @@ final class Plugin
     // ------------------------------------------
     public function register_assets()
     {
+        // ----------------------------------------
+        // Enqueue main stylesheet with versioning
+        // ----------------------------------------
         wp_enqueue_style(
             'satori-ec-main',
             SATORI_EC_PLUGIN_URL . 'assets/css/main.css',
             [],
             SATORI_EC_VERSION
+        );
+
+        // ----------------------------------------
+        // Enqueue frontend filter & toggle JS
+        // ----------------------------------------
+        wp_enqueue_script(
+            'satori-ec-filter-toggle',
+            SATORI_EC_PLUGIN_URL . 'assets/js/filter-toggle.js',
+            [], // No dependencies since vanilla JS
+            SATORI_EC_VERSION,
+            true // Load in footer
         );
     }
 
