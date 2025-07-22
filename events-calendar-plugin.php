@@ -1,5 +1,9 @@
 <?php
 
+namespace Satori_EC;
+
+defined('ABSPATH') || exit; // Exit if accessed directly
+
 /**
  * Plugin Name: Events Calendar Plugin
  * Description: A lightweight, modular Events Calendar plugin for WordPress.
@@ -7,8 +11,6 @@
  * Author: Satori Graphics Pty Ltd
  * Text Domain: satori-ec
  */
-
-defined('ABSPATH') || exit; // Exit if accessed directly
 
 // ----------------------------------------------
 // Define constants
@@ -18,10 +20,8 @@ define('SATORI_EC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SATORI_EC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // ----------------------------------------------
-// Namespace and main plugin class
+// Main plugin class
 // ----------------------------------------------
-namespace Satori_EC;
-
 final class Plugin
 {
 
