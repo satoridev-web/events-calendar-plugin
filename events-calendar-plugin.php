@@ -41,6 +41,9 @@ final class Plugin
 
         // Register assets
         add_action('wp_enqueue_scripts', [$this, 'register_assets']);
+
+        // Hook into pre_get_posts for archive filtering
+        add_action('pre_get_posts', [$this, 'filter_events_archive']);
     }
 
     // ------------------------------------------
@@ -98,6 +101,43 @@ final class Plugin
             SATORI_EC_VERSION,
             true // Load in footer
         );
+    }
+
+    // ------------------------------------------
+    // Filter the main query for events archive pages
+    // ------------------------------------------
+    public function filter_events_archive($query)
+    {
+        // Bail early if in admin or not main query
+        if (is_admin() || ! $query->is_main_query()) {
+            return;
+        }
+
+        // Check if we are on the event archive or event category taxonomy
+        if (is_post_type_archive('event') || is_tax('event_category')) {
+
+            // Search filter from URL
+            if (isset($_GET['s']) && ! empty($_GET['s'])) {
+                $query->set('s', sanitize_text_field(wp_unslash($_GET['s'])));
+            }
+
+            // Category filter from URL parameter ec_category
+            if (isset($_GET['ec_category']) && ! empty($_GET['ec_category'])) {
+                $tax_query = [
+                    [
+                        'taxonomy' => 'event_category',
+                        'field'    => 'slug',
+                        'terms'    => sanitize_text_field(wp_unslash($_GET['ec_category'])),
+                    ],
+                ];
+                $query->set('tax_query', $tax_query);
+            }
+
+            // Set posts per page, adjust if you want to make dynamic
+            $query->set('posts_per_page', 9);
+
+            // Optional: add orderby, order etc. here if needed
+        }
     }
 
     // ------------------------------------------
