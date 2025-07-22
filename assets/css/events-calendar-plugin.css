@@ -1,0 +1,709 @@
+/**
+ * EVENTS CALENDAR PLUGIN CSS
+ * Version: 1.0.0
+ * Description: Basic styling for single event display, form output, and feedback.
+ * Author: Satori Graphics
+ */
+
+/* ================================
+   General Layout Container
+   ================================ */
+   .ec-event-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    line-height: 1.6;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  /* ================================
+     Event Title
+     ================================ */
+  .ec-event-title {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #222;
+  }
+  
+  /* ================================
+     Featured Image
+     ================================ */
+  .ec-event-thumbnail,
+  .ec-event-featured-image {
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  
+  .ec-event-thumbnail img,
+  .ec-event-featured-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ================================
+     Event Meta Section
+     ================================ */
+  .ec-event-meta,
+  .ec-event-details {
+    margin-top: 1.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+  }
+  
+  .ec-event-meta p,
+  .ec-event-details p {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    margin: 0.25em 0;
+  }
+  
+  .ec-event-meta strong,
+  .ec-event-details strong {
+    min-width: 115px;
+    font-weight: 600;
+    flex-shrink: 0;
+    color: #333;
+  }
+  
+  /* ================================
+     Main Content Section
+     ================================ */
+  .ec-event-content {
+    margin-top: 2rem;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  /* ================================
+     Form Success / Error Notices
+     ================================ */
+  .ec-success,
+  .ec-error {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-left: 5px solid;
+  }
+  
+  .ec-success {
+    background-color: #e6ffed;
+    border-color: #38a169;
+    color: #22543d;
+  }
+  
+  .ec-error {
+    background-color: #ffe6e6;
+    border-color: #e53e3e;
+    color: #742a2a;
+  }
+  
+  /* ================================
+     Form Layout (Basic Styling)
+     ================================ */
+  .ec-event-submission-form *,
+  .ec-event-submission-form *::before,
+  .ec-event-submission-form *::after {
+    box-sizing: border-box;
+  }
+  
+  .ec-event-submission-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #f6f7fd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .ec-event-submission-form p {
+    margin-bottom: 1.25rem;
+  }
+  
+  .ec-event-submission-form label {
+    font-weight: 500;
+    color: #222;
+  }
+  
+  .ec-event-submission-form input[type="text"],
+  .ec-event-submission-form input[type="date"],
+  .ec-event-submission-form input[type="time"],
+  .ec-event-submission-form input[type="file"],
+  .ec-event-submission-form select,
+  .ec-event-submission-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* ================================
+     Submit Button
+     ================================ */
+  .ec-event-submission-form button[type="submit"] {
+    display: block;
+    width: 100%;
+    margin: 2.5rem auto 0;
+    background-color: #0073aa;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .ec-event-submission-form button[type="submit"]:hover {
+    background-color: #005177;
+  }
+  
+  /* ================================
+     Responsive Tweak for Mobile
+     ================================ */
+  @media (max-width: 600px) {
+    .ec-event-meta p,
+    .ec-event-details p {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .ec-event-meta strong,
+    .ec-event-details strong {
+      min-width: auto;
+    }
+  
+    .ec-event-submission-form {
+      padding: 1rem;
+    }
+  }
+  
+  /* ================================
+     View Toggle Buttons
+     ================================ */
+  .ec-view-toggle {
+    display: flex;
+    gap: 0.5rem;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  
+  .ec-toggle-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .ec-toggle-button:hover {
+    background-color: #0073aa;
+    color: #fff;
+  }
+  
+  .ec-toggle-button.active {
+    background-color: #0073aa;
+    color: #fff;
+    font-weight: 600;
+    border-color: #0073aa;
+    cursor: default;
+  }
+  
+  /* ================================
+     List View Layout
+     ================================ */
+  .ec-archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .ec-list-card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    align-items: flex-start;
+  }
+  
+  .ec-list-date {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0073aa;
+    min-width: 100px;
+    text-align: center;
+    background: #f0f8ff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  
+  .ec-list-content {
+    flex: 1;
+  }
+  
+  .ec-list-title {
+    font-size: 1.2rem;
+    margin: 0 0 0.3rem 0;
+  }
+  
+  .ec-list-title a {
+    color: #222;
+    text-decoration: none;
+  }
+  
+  .ec-list-title a:hover {
+    color: #0073aa;
+  }
+  
+  .ec-list-excerpt {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  /* ================================
+     Responsive Adjustments for List View
+     ================================ */
+  @media (max-width: 600px) {
+    .ec-list-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .ec-list-date {
+      margin-bottom: 0.5rem;
+      width: 100%;
+    }
+  
+    .ec-view-toggle {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
+  /* ================================
+     Event Archive Grid Layout
+     ================================ */
+  .ec-archive-wrapper {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+  
+  .ec-archive-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #222;
+  }
+  
+/* ================================
+   Grid Layout Consistent Width
+   ================================ */
+   .ec-archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+  }  
+  
+  /* ================================
+     Event Card
+     ================================ */
+  .ec-archive-card {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ec-archive-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  
+  .ec-archive-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* ================================
+     Date Ribbon
+     ================================ */
+  .ec-event-date-ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #0073aa;
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-bottom-right-radius: 8px;
+  }
+  
+  /* ================================
+     Card Content
+     ================================ */
+  .ec-archive-card-content {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .ec-archive-card-title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: #222;
+  }
+  
+  .ec-event-excerpt {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* ================================
+     Event Tags
+     ================================ */
+  .ec-event-tags {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .ec-event-tags span {
+    margin: 0.25rem;
+    color: #aaaaaa;
+  }
+  
+  .ec-event-card-meta {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #0073aa;
+    margin-bottom: 0.75rem;
+  }
+  
+  .ec-event-read-more {
+    display: inline-block;
+    margin: 1.5rem auto 0;
+    text-decoration: none;
+    color: #0073aa;
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.2s ease;
+  }
+  
+  .ec-event-read-more:hover {
+    color: #005177;
+  }
+  
+  /* ================================
+     Read More Button (Duplicate? Included for safety)
+     ================================ */
+  .ec-event-read-more {
+    margin-top: auto;
+    display: inline-block;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    color: #0073aa;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  
+  .ec-event-read-more:hover {
+    color: #005177;
+  }
+  
+  /* ================================
+     Archive Filters and Search + View Toggles Container
+     ================================ */
+  .ec-event-filters-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+  
+  /* ================================
+     Archive Filters
+     ================================ */
+  .ec-event-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  /* Each filter block and search aligned vertically */
+  .ec-filter-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px; /* Consistent width */
+  }
+  
+  .ec-filter-group label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: #333;
+    font-size: 0.9rem;
+  }
+  
+  .ec-filter-group select {
+    width: 180px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    cursor: pointer;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path fill="%23333" d="M0 0l5 6 5-6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px 8px;
+  }
+  
+  /* Remove native dropdown arrow in IE */
+  .ec-filter-group select::-ms-expand {
+    display: none;
+  }
+  
+/* ================================
+   Search Input Styling
+   ================================ */
+   .ec-filter-search {
+    position: relative; /* For positioning the clear button */
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    flex: 1 1 auto; /* Allow it to stretch nicely if needed */
+  }
+  
+  .ec-filter-search input[type="search"],
+  .ec-filter-search input[type="text"] {
+    width: 100%;
+    padding: 0.4rem 2.4rem 0.4rem 0.8rem; /* Add right padding for 'X' button */
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* ================================
+     Clear Search "X" Button
+     ================================ */
+  .ec-search-clear {
+    position: absolute;
+    top: 50%;
+    right: 0.6rem;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+  }
+  
+  .ec-search-clear:hover {
+    color: #0073aa;
+  }  
+
+  .ec-search-clear {
+    display: none;
+  }  
+  
+  /* ================================
+     Filter Button
+     ================================ */
+  .ec-filter-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0073aa;
+    color: #fff;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 1rem;
+  }
+  
+  .ec-filter-button:hover {
+    background-color: #005177;
+  }
+  
+  /* ================================
+     View Toggle Buttons
+     ================================ */
+  .ec-view-toggle {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .ec-toggle-button {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .ec-toggle-button:hover {
+    background-color: #0073aa;
+    color: #fff;
+  }
+  
+  .ec-toggle-button.active {
+    background-color: #0073aa;
+    color: #fff;
+    font-weight: 600;
+    border-color: #0073aa;
+    cursor: default;
+  }
+  
+  /* ================================
+     Responsive Filter and Controls Adjustments
+     ================================ */
+  @media (max-width: 900px) {
+    .ec-event-filters-wrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+  
+    .ec-event-filters,
+    .ec-filter-search,
+    .ec-filter-group {
+      min-width: 150px;
+      margin-bottom: 0.75rem;
+    }
+  
+    .ec-filter-group select,
+    .ec-filter-search input[type="search"],
+    .ec-filter-search input[type="text"] {
+      width: 150px;
+    }
+  
+    .ec-view-toggle {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .ec-event-filters-wrapper {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+  
+    .ec-event-filters {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .ec-filter-search,
+    .ec-filter-group {
+      width: 100%;
+      min-width: 100%;
+      margin-bottom: 0;
+    }
+  
+    .ec-filter-group select,
+    .ec-filter-search input[type="search"],
+    .ec-filter-search input[type="text"] {
+      width: 100%;
+    }
+  
+    .ec-view-toggle {
+      justify-content: center;
+      width: 100%;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+  }
+  
+  /* ================================
+     Event Archive Pagination
+     ================================ */
+  .ec-pagination {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
+  .ec-pagination .page-numbers {
+    display: inline-block;
+    margin: 0 0.3rem;
+    padding: 0.5rem 0.9rem;
+    background: #f1f1f1;
+    border-radius: 4px;
+    color: #0073aa;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  
+  .ec-pagination .page-numbers.current {
+    background: #0073aa;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .ec-pagination .page-numbers:hover {
+    background: #005177;
+    color: #fff;
+  }
+  

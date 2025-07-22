@@ -1,0 +1,21 @@
+// _animations.scss
+// Satori Graphics - Custom Event Card Animations
+
+// Already included in _mixins.scss as fadeInUp
+// If needed, you can add more here:
+
+// Slide-in (optional future enhancement)
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@mixin slide-in($duration: 0.3s) {
+  animation: slideIn $duration ease-out forwards;
+}

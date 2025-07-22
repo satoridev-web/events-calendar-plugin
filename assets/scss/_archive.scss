@@ -1,0 +1,186 @@
+// _archive.scss
+// Satori Graphics - Archive View (Grid + List + Filters)
+
+.ec-archive-wrapper {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.ec-archive-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: $color-text-dark;
+}
+
+/* Grid layout */
+.ec-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Card */
+.ec-archive-card {
+  position: relative;
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: 0 2px 10px $color-shadow;
+  display: flex;
+  flex-direction: column;
+  @include fade-in-up;
+}
+
+.ec-archive-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* Date ribbon */
+.ec-event-date-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $color-primary;
+  color: $color-white;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-bottom-right-radius: $border-radius;
+}
+
+/* Content */
+.ec-archive-card-content {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ec-archive-card-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: $color-text-dark;
+}
+
+.ec-event-excerpt {
+  text-align: center;
+  font-size: 0.95rem;
+  color: $color-text-muted;
+  line-height: 1.5;
+}
+
+.ec-event-tags {
+  margin-top: 1rem;
+  text-align: center;
+
+  span {
+    margin: 0.25rem;
+    color: $color-gray-muted;
+  }
+}
+
+.ec-event-card-meta {
+  text-align: center;
+  font-size: 0.9rem;
+  color: $color-primary;
+  margin-bottom: 0.75rem;
+}
+
+.ec-event-read-more {
+  margin-top: auto;
+  display: inline-block;
+  text-decoration: none;
+  color: $color-primary;
+  font-weight: 600;
+  text-align: center;
+  @include transition-fast(color);
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
+
+/* List layout */
+.ec-archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ec-list-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: $color-white;
+  border: 1px solid $color-gray-lighter;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  align-items: flex-start;
+}
+
+.ec-list-date {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $color-primary;
+  min-width: 100px;
+  text-align: center;
+  background: #f0f8ff;
+  padding: 0.5rem;
+  border-radius: $border-radius;
+  flex-shrink: 0;
+}
+
+.ec-list-content {
+  flex: 1;
+}
+
+.ec-list-title {
+  font-size: 1.2rem;
+  margin: 0 0 0.3rem;
+
+  a {
+    color: $color-text-dark;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.ec-list-excerpt {
+  font-size: 0.95rem;
+  color: $color-text-muted;
+}
+
+// Responsive list
+@include respond-small {
+  .ec-list-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ec-list-date {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+}

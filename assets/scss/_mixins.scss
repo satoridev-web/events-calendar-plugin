@@ -1,0 +1,42 @@
+// _mixins.scss
+// Satori Graphics - Common Mixins for Events Calendar Plugin
+
+// Flex center helper
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Transition helper
+@mixin transition-fast($properties: all, $duration: 0.2s, $timing: ease) {
+  transition: $properties $duration $timing;
+}
+
+// Media queries
+@mixin respond-medium {
+  @media (max-width: $bp-medium) {
+    @content;
+  }
+}
+
+@mixin respond-small {
+  @media (max-width: $bp-small) {
+    @content;
+  }
+}
+
+// Fade-in-up animation
+@mixin fade-in-up($distance: 10px, $duration: 0.3s, $timing: ease-out) {
+  opacity: 0;
+  transform: translateY($distance);
+  animation: fadeInUp $duration $timing forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

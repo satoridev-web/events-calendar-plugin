@@ -1,0 +1,93 @@
+// _form.scss
+// Satori Graphics - Event submission form styles
+
+.ec-event-submission-form {
+  max-width: 700px;
+  margin: $gap-xl auto;
+  padding: $padding-section;
+  background: $color-bg-light;
+  border: 1px solid $color-gray-light;
+  border-radius: $border-radius;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  p {
+    margin-bottom: 1.25rem;
+  }
+
+  label {
+    font-weight: 500;
+    color: $color-text-dark;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  input[type="file"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    border: 1px solid $color-gray-light;
+    border-radius: $border-radius;
+  }
+
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    margin: 2.5rem auto 0;
+    background-color: $color-primary;
+    color: $color-white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    @include transition-fast(background-color, 0.2s);
+
+    &:hover {
+      background-color: $color-primary-dark;
+    }
+  }
+}
+
+button {
+  background-color: #0073aa;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #005177;
+  }
+}
+
+
+// Form success and error messages
+.ec-success,
+.ec-error {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-left: 5px solid;
+}
+
+.ec-success {
+  background-color: $color-success-bg;
+  border-color: $color-success-border;
+  color: $color-success-text;
+}
+
+.ec-error {
+  background-color: $color-error-bg;
+  border-color: $color-error-border;
+  color: $color-error-text;
+}

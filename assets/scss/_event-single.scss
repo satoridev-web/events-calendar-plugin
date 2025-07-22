@@ -1,0 +1,53 @@
+// _event-single.scss
+// Satori Graphics - Single Event Page Styling
+
+.ec-event-thumbnail,
+.ec-event-featured-image {
+  margin: $gap-lg 0;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.ec-event-meta,
+.ec-event-details {
+  margin-top: $gap-lg;
+  border-top: 1px solid $color-gray-lighter;
+  padding-top: $gap-md;
+
+  p {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    margin: 0.25em 0;
+  }
+
+  strong {
+    min-width: 115px;
+    font-weight: 600;
+    flex-shrink: 0;
+    color: #333;
+  }
+
+  @include respond-small {
+    p {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    strong {
+      min-width: auto;
+    }
+  }
+}
+
+.ec-event-content {
+  margin-top: 2rem;
+  color: $color-text-dark;
+  font-size: 1rem;
+}
