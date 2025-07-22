@@ -1,89 +1,122 @@
 <?php
 
-namespace Satori_EC;
-
-defined('ABSPATH') || exit; // Exit if accessed directly
-
 /**
  * Plugin Name: Events Calendar Plugin
+ * Plugin URI:  https://satori.com.au/
  * Description: A lightweight, modular Events Calendar plugin for WordPress.
- * Version: 1.0.0
- * Author: Satori Graphics Pty Ltd
+ * Version:     1.0.0
+ * Author:      Satori Graphics Pty Ltd
+ * Author URI:  https://satori.com.au/
  * Text Domain: satori-ec
  */
 
-// ----------------------------------------------
-// Define constants
-// ----------------------------------------------
+namespace Satori_EC;
+
+defined('ABSPATH') || exit; // Prevent direct access
+
+// --------------------------------------------------
+// Constants
+// --------------------------------------------------
 define('SATORI_EC_VERSION', '1.0.0');
 define('SATORI_EC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SATORI_EC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-// ----------------------------------------------
-// Main plugin class
-// ----------------------------------------------
+// --------------------------------------------------
+// Core Plugin Class
+// --------------------------------------------------
 final class Plugin
 {
 
-    // ------------------------------------------
-    // Run plugin setup on init
-    // ------------------------------------------
+    /**
+     * Shortcode Manager instance
+     *
+     * @var Shortcode_Manager|null
+     */
+    private $shortcode_manager = null;
+
+    /**
+     * Constructor – Hooks into WP lifecycle
+     */
     public function __construct()
     {
-        // Load core includes
+        // Load modular files
         $this->load_includes();
 
         // Load translations
         add_action('plugins_loaded', [$this, 'load_textdomain']);
 
-        // Hook into init or other WordPress actions as needed
+        // Register post type
         add_action('init', [$this, 'register_post_type']);
 
-        // Register assets
+        // Register shortcodes on init hook
+        add_action('init', [$this, 'register_shortcodes']);
+
+        // Enqueue styles and scripts
         add_action('wp_enqueue_scripts', [$this, 'register_assets']);
 
-        // Hook into pre_get_posts for archive filtering
+        // Modify event archive queries
         add_action('pre_get_posts', [$this, 'filter_events_archive']);
     }
 
-    // ------------------------------------------
-    // Load modular files
-    // ------------------------------------------
+    /**
+     * Load all required PHP files
+     */
     private function load_includes()
     {
-        include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-archive-shortcode.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-form-handler.php';
-        // Add more includes here as needed
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-form-fields.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-search-filter.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-excerpt-override.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-session.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-meta-boxes.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-template-loader.php';
+
+        // Shortcodes
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-archive-shortcode.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-shortcode-manager.php';
+
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-submission-form.php'; // Optional frontend handler
     }
 
-    // ------------------------------------------
-    // Load plugin textdomain for translations
-    // ------------------------------------------
+    /**
+     * Load plugin text domain for translations
+     */
     public function load_textdomain()
     {
         load_plugin_textdomain(
-            'satori-ec', // Text domain
+            'satori-ec',
             false,
             dirname(plugin_basename(__FILE__)) . '/languages/'
         );
     }
 
-    // ------------------------------------------
-    // Register custom post type (example stub)
-    // ------------------------------------------
+    /**
+     * Register custom post type(s)
+     */
     public function register_post_type()
     {
-        // Optional: register_event_post_type() or other logic
+        // TODO: Implement register_event_post_type() or similar
     }
 
-    // ------------------------------------------
-    // Register CSS/JS assets
-    // ------------------------------------------
+    /**
+     * Register shortcodes using the Shortcode Manager class
+     */
+    public function register_shortcodes()
+    {
+        if (null === $this->shortcode_manager) {
+            $this->shortcode_manager = new Shortcode_Manager();
+        }
+
+        // The Shortcode_Manager constructor will handle the registration of all shortcodes,
+        // so no need to call any additional methods here.
+    }
+
+    /**
+     * Register frontend CSS and JavaScript
+     */
     public function register_assets()
     {
-        // ----------------------------------------
-        // Enqueue main stylesheet with versioning
-        // ----------------------------------------
+        // Main stylesheet
         wp_enqueue_style(
             'satori-ec-main',
             SATORI_EC_PLUGIN_URL . 'assets/css/main.css',
@@ -91,82 +124,73 @@ final class Plugin
             SATORI_EC_VERSION
         );
 
-        // ----------------------------------------
-        // Enqueue frontend filter & toggle JS
-        // ----------------------------------------
+        // Toggle/filter JavaScript
         wp_enqueue_script(
             'satori-ec-filter-toggle',
             SATORI_EC_PLUGIN_URL . 'assets/js/filter-toggle.js',
-            [], // No dependencies since vanilla JS
+            [],
             SATORI_EC_VERSION,
-            true // Load in footer
+            true
         );
     }
 
-    // ------------------------------------------
-    // Filter the main query for events archive pages
-    // ------------------------------------------
+    /**
+     * Modify WP_Query for event archive filtering
+     */
     public function filter_events_archive($query)
     {
-        // Bail early if in admin or not main query
         if (is_admin() || ! $query->is_main_query()) {
             return;
         }
 
-        // Check if we are on the event archive or event category taxonomy
         if (is_post_type_archive('event') || is_tax('event_category')) {
-
-            // Search filter from URL
-            if (isset($_GET['s']) && ! empty($_GET['s'])) {
+            // Keyword search
+            if (!empty($_GET['s'])) {
                 $query->set('s', sanitize_text_field(wp_unslash($_GET['s'])));
             }
 
-            // Category filter from URL parameter ec_category
-            if (isset($_GET['ec_category']) && ! empty($_GET['ec_category'])) {
-                $tax_query = [
+            // Category filter via URL param
+            if (!empty($_GET['ec_category'])) {
+                $query->set('tax_query', [
                     [
                         'taxonomy' => 'event_category',
                         'field'    => 'slug',
                         'terms'    => sanitize_text_field(wp_unslash($_GET['ec_category'])),
-                    ],
-                ];
-                $query->set('tax_query', $tax_query);
+                    ]
+                ]);
             }
 
-            // Set posts per page, adjust if you want to make dynamic
+            // Pagination control
             $query->set('posts_per_page', 9);
-
-            // Optional: add orderby, order etc. here if needed
         }
     }
 
-    // ------------------------------------------
-    // Plugin activation routine
-    // ------------------------------------------
+    /**
+     * Activation callback
+     */
     public static function activate()
     {
-        // Flush rewrite rules
         flush_rewrite_rules();
     }
 
-    // ------------------------------------------
-    // Plugin deactivation routine (optional)
-    // ------------------------------------------
+    /**
+     * Deactivation callback
+     */
     public static function deactivate()
     {
         flush_rewrite_rules();
     }
 }
 
-// ----------------------------------------------
-// Instantiate the plugin
-// ----------------------------------------------
+// --------------------------------------------------
+// Bootstrap Plugin
+// --------------------------------------------------
 add_action('plugins_loaded', function () {
     new Plugin();
 });
 
-// ----------------------------------------------
-// Register activation & deactivation hooks
-// ----------------------------------------------
+// --------------------------------------------------
+// Register Lifecycle Hooks
+// --------------------------------------------------
 register_activation_hook(__FILE__, ['\Satori_EC\Plugin', 'activate']);
 register_deactivation_hook(__FILE__, ['\Satori_EC\Plugin', 'deactivate']);
