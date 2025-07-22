@@ -1,42 +1,46 @@
 <?php
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 // ===================================================================
 // Template: archive-view-toggle.php
 // Description: UI toggle between grid and list views
 // ===================================================================
 
-// Get current view from URL or fallback to 'grid'
-$current_view = isset( $_GET['view'] ) ? sanitize_text_field( $_GET['view'] ) : 'grid';
+// ---------------------------------------------------------------
+// Get current view from query string or fallback to 'grid'
+// ---------------------------------------------------------------
+$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
-// Prepare current query string for reuse
-$current_url = remove_query_arg( [ 'view' ] );
+// Build base URL (excluding 'view') to append toggles
+$current_url = remove_query_arg(['view']);
 ?>
 
-<div class="ec-view-toggle">
+<div class="ec-view-toggle" role="group" aria-label="<?php esc_attr_e('Toggle View Mode', 'events-calendar-plugin'); ?>">
 
 	<?php
 	// ---------------------------------------------------------------
 	// Hook: before toggle links
 	// ---------------------------------------------------------------
-	do_action( 'ec_before_view_toggle_buttons' );
+	do_action('ec_before_view_toggle_buttons');
 	?>
 
-	<a href="<?php echo esc_url( add_query_arg( 'view', 'grid', $current_url ) ); ?>"
-	   class="ec-toggle-btn <?php echo $current_view === 'grid' ? 'is-active' : ''; ?>">
-		<?php esc_html_e( 'Grid View', 'events-calendar-plugin' ); ?>
+	<a href="<?php echo esc_url(add_query_arg('view', 'grid', $current_url)); ?>"
+		class="ec-toggle-btn <?php echo $current_view === 'grid' ? 'is-active' : ''; ?>"
+		aria-pressed="<?php echo $current_view === 'grid' ? 'true' : 'false'; ?>">
+		<?php esc_html_e('Grid View', 'events-calendar-plugin'); ?>
 	</a>
 
-	<a href="<?php echo esc_url( add_query_arg( 'view', 'list', $current_url ) ); ?>"
-	   class="ec-toggle-btn <?php echo $current_view === 'list' ? 'is-active' : ''; ?>">
-		<?php esc_html_e( 'List View', 'events-calendar-plugin' ); ?>
+	<a href="<?php echo esc_url(add_query_arg('view', 'list', $current_url)); ?>"
+		class="ec-toggle-btn <?php echo $current_view === 'list' ? 'is-active' : ''; ?>"
+		aria-pressed="<?php echo $current_view === 'list' ? 'true' : 'false'; ?>">
+		<?php esc_html_e('List View', 'events-calendar-plugin'); ?>
 	</a>
 
 	<?php
 	// ---------------------------------------------------------------
 	// Hook: after toggle links
 	// ---------------------------------------------------------------
-	do_action( 'ec_after_view_toggle_buttons' );
+	do_action('ec_after_view_toggle_buttons');
 	?>
 
 </div>

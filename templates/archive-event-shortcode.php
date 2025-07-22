@@ -1,94 +1,92 @@
 <?php
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-// ===================================================================
-// Template: archive-event-shortcode.php
-// Description: Renders the events archive when displayed via shortcode
-// ===================================================================
+// ==============================================================================
+// TEMPLATE: archive-event-shortcode.php
+// PURPOSE: Renders the events archive when displayed via the [ec_event_archive] shortcode
+// AUTHOR: Satori Graphics Pty Ltd
+// ==============================================================================
 
-// Bail if required query variable is not passed
-if ( ! isset( $query ) || ! $query instanceof WP_Query ) {
-	echo '<p>' . esc_html__( 'Invalid query.', 'events-calendar-plugin' ) . '</p>';
+// ----------------------------------------------------------------------------
+// SANITY CHECK: Ensure the $query variable is a valid WP_Query object
+// ----------------------------------------------------------------------------
+if (! isset($query) || ! $query instanceof WP_Query) {
+	echo '<p>' . esc_html__('Invalid query.', 'events-calendar-plugin') . '</p>';
 	return;
 }
 
-// -------------------------------------------------------------------
-// Determine view mode: 'grid' (default) or 'list'
-// -------------------------------------------------------------------
-$view = isset( $final_view ) ? $final_view : 'grid';
+// ----------------------------------------------------------------------------
+// SET VIEW MODE: Determine whether to display events in 'grid' or 'list' format
+// ----------------------------------------------------------------------------
+$view = isset($final_view) ? $final_view : 'grid';
 ?>
 
-<div class="ec-archive-wrapper" data-default-view="<?php echo esc_attr( $view ); ?>">
+<div class="ec-archive-wrapper" data-default-view="<?php echo esc_attr($view); ?>">
 
 	<?php
-	// ---------------------------------------------------------------
-	// Include filter bar template if available
-	// ---------------------------------------------------------------
-	$filters_template = ec_locate_template( 'templates/parts/archive-filters.php' );
-	if ( $filters_template ) {
-		// Hook: before filter bar (extensibility)
-		do_action( 'ec_before_archive_filters' );
-
+	// ----------------------------------------------------------------------------
+	// INCLUDE: Archive Filters Bar
+	// ----------------------------------------------------------------------------
+	$filters_template = ec_locate_template('templates/parts/archive-filters.php');
+	if ($filters_template) {
+		do_action('ec_before_archive_filters');
 		include $filters_template;
-
-		// Hook: after filter bar (extensibility)
-		do_action( 'ec_after_archive_filters' );
+		do_action('ec_after_archive_filters');
 	}
 
-	// ---------------------------------------------------------------
-	// Include view toggle template if available
-	// ---------------------------------------------------------------
-	$toggle_template = ec_locate_template( 'templates/parts/archive-view-toggle.php' );
-	if ( $toggle_template ) {
-		// Hook: before view toggle
-		do_action( 'ec_before_archive_toggle' );
-
+	// ----------------------------------------------------------------------------
+	// INCLUDE: View Toggle Buttons (Grid/List)
+	// ----------------------------------------------------------------------------
+	$toggle_template = ec_locate_template('templates/parts/archive-view-toggle.php');
+	if ($toggle_template) {
+		do_action('ec_before_archive_toggle');
 		include $toggle_template;
-
-		// Hook: after view toggle
-		do_action( 'ec_after_archive_toggle' );
+		do_action('ec_after_archive_toggle');
 	}
 	?>
 
-	<?php if ( $query->have_posts() ) : ?>
-		<div class="<?php echo esc_attr( $view === 'list' ? 'ec-archive-list' : 'ec-archive-grid' ); ?>">
-
+	<?php if ($query->have_posts()) : ?>
+		<div
+			class="<?php echo esc_attr($view === 'list' ? 'ec-archive-list' : 'ec-archive-grid'); ?>"
+			role="region"
+			aria-live="polite">
 			<?php
-			// -----------------------------------------------------------
-			// Loop through posts and render event cards or list items
-			// -----------------------------------------------------------
-			while ( $query->have_posts() ) :
+			// ----------------------------------------------------------------------------
+			// LOOP: Render each event using relevant partial (grid or list)
+			// ----------------------------------------------------------------------------
+			while ($query->have_posts()) :
 				$query->the_post();
 
-				// Action: before event item
-				do_action( 'ec_before_event_item', get_the_ID() );
+				do_action('ec_before_event_item', get_the_ID());
 
-				// Template part: event-card.php or event-list.php
-				get_template_part( 'templates/parts/content', $view === 'list' ? 'event-list' : 'event-card' );
+				get_template_part(
+					'templates/parts/content',
+					$view === 'list' ? 'event-list' : 'event-card'
+				);
 
-				// Action: after event item
-				do_action( 'ec_after_event_item', get_the_ID() );
+				do_action('ec_after_event_item', get_the_ID());
 
 			endwhile;
 			?>
-
 		</div>
 
 		<div class="ec-pagination">
 			<?php
-			// -----------------------------------------------------------
-			// Paginate results
-			// -----------------------------------------------------------
-			echo paginate_links( [
+			// ----------------------------------------------------------------------------
+			// PAGINATION: Display pagination links for archive results
+			// ----------------------------------------------------------------------------
+			echo paginate_links([
 				'total'   => $query->max_num_pages,
-				'current' => max( 1, get_query_var( 'paged' ) ),
-			] );
+				'current' => max(1, get_query_var('paged')),
+			]);
 			?>
 		</div>
 
 	<?php else : ?>
 
-		<p class="ec-no-events"><?php esc_html_e( 'No events found.', 'events-calendar-plugin' ); ?></p>
+		<p class="ec-no-events">
+			<?php esc_html_e('No events found.', 'events-calendar-plugin'); ?>
+		</p>
 
 	<?php endif; ?>
 

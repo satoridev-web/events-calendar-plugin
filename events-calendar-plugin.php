@@ -33,6 +33,9 @@ final class Plugin
         // Load core includes
         $this->load_includes();
 
+        // Load translations
+        add_action('plugins_loaded', [$this, 'load_textdomain']);
+
         // Hook into init or other WordPress actions as needed
         add_action('init', [$this, 'register_post_type']);
 
@@ -48,6 +51,18 @@ final class Plugin
         include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-archive-shortcode.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-form-handler.php';
         // Add more includes here as needed
+    }
+
+    // ------------------------------------------
+    // Load plugin textdomain for translations
+    // ------------------------------------------
+    public function load_textdomain()
+    {
+        load_plugin_textdomain(
+            'satori-ec', // Text domain
+            false,
+            dirname(plugin_basename(__FILE__)) . '/languages/'
+        );
     }
 
     // ------------------------------------------
