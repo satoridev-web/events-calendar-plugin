@@ -6,24 +6,30 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [1.0.1] – 2025-07-22
+## [1.0.1-dev] – 2025-07-22
 
 ### Added
 
-- Improved accessibility: Added ARIA roles, labels, and `aria-live="polite"` support to event archive templates.
-- Wrapped filter inputs in `<fieldset>` with `<legend>` for better semantic grouping and accessibility.
-- Enhanced internationalization (i18n) support throughout shortcode and template files using `__()` and `_e()`.
-- Added a view toggle UI with proper ARIA attributes and keyboard accessible state management.
-- SATORI commenting standard applied consistently across templates and plugin files.
+- Shortcode system now fully modular via `Shortcode_Manager` class, enabling scalable shortcode registration.
+- Refactored `[ec_event_archive]` shortcode into its own class: `EC_Archive_Shortcode`.
+- Introduced archive template loading system via `ec_locate_template()` for cleaner shortcode rendering.
+- Added view toggle support (`grid` vs `list`) with accessible markup and ARIA attributes.
+- Improved accessibility: ARIA roles, labels, and `aria-live="polite"` support for dynamic archive rendering.
+- Wrapped filters and search inputs in semantic `<fieldset>` blocks with `<legend>` labels.
+- Added dedicated template partials for archive filters and view toggles, improving modularity.
+- Commenting style now follows SATORI standards throughout all updated plugin files.
+- Enhanced i18n readiness using `__()` and `_e()` in all display-facing strings.
 
 ### Fixed
 
-- Fixed escaping and sanitization issues in templates to improve security and stability.
-- Resolved Git commit blocking issue by configuring global user name and email.
+- Template escaping/sanitization hardening to improve front-end security and validation.
+- Resolved missing CPT visibility in admin by correcting `show_ui` and `has_archive` behavior during rewrite/flush.
 
 ### Changed
 
-- Updated README.md with latest plugin features, instructions, and best practices.
+- Updated `ec-archive-event-shortcode.php` to cleanly separate logic, layout, and presentation layers.
+- Reorganized template directory structure to use `/templates/parts/` for partials (filters, toggles, cards, list).
+- Template markup updated to match accessibility best practices.
 
 ---
 
