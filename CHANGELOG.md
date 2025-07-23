@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [1.0.1-dev] – 2025-07-22
+## [1.0.1-dev] – 2025-07-23
 
 ### Added
 
@@ -19,17 +19,26 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Added dedicated template partials for archive filters and view toggles, improving modularity.
 - Commenting style now follows SATORI standards throughout all updated plugin files.
 - Enhanced i18n readiness using `__()` and `_e()` in all display-facing strings.
+- Updated core plugin bootstrap file to include taxonomy registration and all includes with correct `ec-*` naming and folder structure.
+- Improved event archive filtering query and asset enqueuing consistency.
+- Added taxonomy registration (`event_type`) include and hooked correctly.
+- Enforced plugin text domain loading with updated domain `satori-ec`.
 
 ### Fixed
 
 - Template escaping/sanitization hardening to improve front-end security and validation.
 - Resolved missing CPT visibility in admin by correcting `show_ui` and `has_archive` behavior during rewrite/flush.
+- Fixed missing taxonomy admin menu by ensuring taxonomy registration file is included properly.
+- Corrected enqueue paths for CSS/JS assets to match actual plugin structure.
 
 ### Changed
 
 - Updated `ec-archive-event-shortcode.php` to cleanly separate logic, layout, and presentation layers.
 - Reorganized template directory structure to use `/templates/parts/` for partials (filters, toggles, cards, list).
 - Template markup updated to match accessibility best practices.
+- Refactored core plugin class to properly load all modular files from `includes/` subfolders.
+- Standardized all file includes to follow SATORI naming conventions (`ec-*` prefix).
+- Adopted improved folder/file organization reflecting current GitHub repo structure.
 
 ---
 
