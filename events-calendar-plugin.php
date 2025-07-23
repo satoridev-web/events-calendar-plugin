@@ -166,7 +166,7 @@ final class Plugin
             }
 
             // Pagination control
-            $query->set('posts_per_page', 9);
+            $query->set('posts_per_page', 3);
         }
     }
 
