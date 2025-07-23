@@ -1,45 +1,54 @@
 <?php
 defined('ABSPATH') || exit;
 
-// ===================================================================
-// Template: archive-view-toggle.php
-// Description: UI toggle between grid and list views
-// ===================================================================
+// ==============================================================================
+// TEMPLATE PART: archive-view-toggle.php
+// PURPOSE: UI toggle between grid and list views for event archives
+// AUTHOR: Satori Graphics Pty Ltd
+// ==============================================================================
 
-// ---------------------------------------------------------------
-// Get current view from query string or fallback to 'grid'
-// ---------------------------------------------------------------
-$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
+// ------------------------------------------------------------------------------
+// GET: Current view from query string (fallback to 'grid')
+// ------------------------------------------------------------------------------
+$current_view = isset($_GET['view']) ? sanitize_text_field(wp_unslash($_GET['view'])) : 'grid';
 
-// Build base URL (excluding 'view') to append toggles
+// ------------------------------------------------------------------------------
+// URL: Build base URL (excluding 'view') to append toggle links
+// ------------------------------------------------------------------------------
 $current_url = remove_query_arg(['view']);
 ?>
 
-<div class="ec-view-toggle" role="group" aria-label="<?php esc_attr_e('Toggle View Mode', 'events-calendar-plugin'); ?>">
+<!-- ========================================================================== -->
+<!-- COMPONENT: View Toggle Buttons                                            -->
+<!-- ROLE: ARIA group with labelled toggle links                              -->
+<!-- ========================================================================== -->
+<div class="ec-view-toggle" role="group" aria-label="<?php echo esc_attr__('Toggle view mode', 'events-calendar-plugin'); ?>">
 
 	<?php
-	// ---------------------------------------------------------------
-	// Hook: before toggle links
-	// ---------------------------------------------------------------
+	// --------------------------------------------------------------------------
+	// HOOK: Before toggle buttons
+	// --------------------------------------------------------------------------
 	do_action('ec_before_view_toggle_buttons');
 	?>
 
+	<!-- Grid View Button -->
 	<a href="<?php echo esc_url(add_query_arg('view', 'grid', $current_url)); ?>"
 		class="ec-toggle-btn <?php echo $current_view === 'grid' ? 'is-active' : ''; ?>"
 		aria-pressed="<?php echo $current_view === 'grid' ? 'true' : 'false'; ?>">
-		<?php esc_html_e('Grid View', 'events-calendar-plugin'); ?>
+		<?php echo esc_html__('Grid View', 'events-calendar-plugin'); ?>
 	</a>
 
+	<!-- List View Button -->
 	<a href="<?php echo esc_url(add_query_arg('view', 'list', $current_url)); ?>"
 		class="ec-toggle-btn <?php echo $current_view === 'list' ? 'is-active' : ''; ?>"
 		aria-pressed="<?php echo $current_view === 'list' ? 'true' : 'false'; ?>">
-		<?php esc_html_e('List View', 'events-calendar-plugin'); ?>
+		<?php echo esc_html__('List View', 'events-calendar-plugin'); ?>
 	</a>
 
 	<?php
-	// ---------------------------------------------------------------
-	// Hook: after toggle links
-	// ---------------------------------------------------------------
+	// --------------------------------------------------------------------------
+	// HOOK: After toggle buttons
+	// --------------------------------------------------------------------------
 	do_action('ec_after_view_toggle_buttons');
 	?>
 

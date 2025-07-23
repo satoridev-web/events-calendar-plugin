@@ -1,43 +1,71 @@
 <?php
-// =============================================================================
-// TEMPLATE LOADER: ec-template-loader.php
-// PURPOSE: Handles template overrides and archive query customization
-// AUTHOR: Satori Graphics Pty Ltd
-// =============================================================================
+
+/**
+ * Template Loader
+ *
+ * Handles template overrides and archive query customization.
+ *
+ * @package Satori_EC
+ */
 
 defined('ABSPATH') || exit;
 
-/* =============================================================================
-   EC Locate Template
-   -----------------------------------------------------------------------------
-   Locate template files in the following order:
-   1. Theme override: /your-theme/events-calendar-plugin/{template-name}
-   2. Plugin fallback: /wp-content/plugins/events-calendar-plugin/templates/
-   ============================================================================= */
-function ec_locate_template($template_name)
+// =============================================================================
+// Locate template files in child theme, parent theme, or plugin fallback.
+// Developers may override using the 'ec_template_path' filter.
+// Caches located templates during request for performance.
+// =============================================================================
+/**
+ * Locate a template file.
+ *
+ * @param string $template_name Filename of the template to locate.
+ * @return string|false Full path to the template or false if not found.
+ */
+function ec_locate_template(string $template_name): string|false
 {
-    $template_paths = array(
-        get_stylesheet_directory() . '/events-calendar-plugin/' . $template_name,
-        plugin_dir_path(__DIR__) . 'templates/' . $template_name,
-    );
+    static $cache = [];
 
-    foreach ($template_paths as $path) {
+    if (isset($cache[$template_name])) {
+        return $cache[$template_name];
+    }
+
+    $paths = [
+        get_stylesheet_directory() . '/events-calendar-plugin/' . $template_name, // Child theme
+        get_template_directory()   . '/events-calendar-plugin/' . $template_name, // Parent theme
+        plugin_dir_path(__DIR__)   . 'templates/' . $template_name,               // Plugin fallback
+    ];
+
+    foreach ($paths as $path) {
         if (file_exists($path)) {
-            return apply_filters('ec_locate_template', $path, $template_name);
+            $cache[$template_name] = apply_filters('ec_template_path', $path, $template_name);
+            return $cache[$template_name];
         }
     }
+
+    // Cache false to avoid repeated file checks
+    $cache[$template_name] = false;
+
+    /**
+     * Action hook fired when a template is missing.
+     *
+     * @param string $template_name Name of the missing template.
+     */
+    do_action('ec_template_missing', $template_name);
 
     return false;
 }
 
-/* =============================================================================
-   EC Load Event Templates
-   -----------------------------------------------------------------------------
-   Intercepts template loading for:
-   - Single event posts
-   - Event archive
-   ============================================================================= */
-function ec_load_event_templates($template)
+// =============================================================================
+// Intercept template loading for single event posts and event archive.
+// Allows theme/plugin overrides.
+// =============================================================================
+/**
+ * Load custom templates for event post types.
+ *
+ * @param string $template The path to the current template.
+ * @return string Modified template path if override found, otherwise original.
+ */
+function ec_load_event_templates(string $template): string
 {
     if (is_singular('event')) {
         $custom_single = ec_locate_template('ec-single-event.php');
@@ -57,27 +85,31 @@ function ec_load_event_templates($template)
 }
 add_filter('template_include', 'ec_load_event_templates');
 
-/* =============================================================================
-   EC Modify Event Archive Query
-   -----------------------------------------------------------------------------
-   Customizes the main query for the 'event' archive:
-   - Posts per page
-   - Sorting (via `?sort=`)
-   - Filtering by taxonomy (via `?event_type=`)
-   ============================================================================= */
-function ec_set_event_archive_query($query)
+// =============================================================================
+// Customize the main query for the 'event' archive:
+// - Set posts per page limit
+// - Sorting via ?sort= parameter
+// - Taxonomy filtering via ?event_type=
+// =============================================================================
+/**
+ * Modify the main query for event archive page.
+ *
+ * @param \WP_Query $query The WP_Query instance (passed by reference).
+ * @return void
+ */
+function ec_set_event_archive_query(\WP_Query $query): void
 {
     if (! is_admin() && $query->is_main_query() && is_post_type_archive('event')) {
 
-        // --------------------------------
+        // -------------------------------------------------------------------------
         // Pagination limit (default: 3)
-        // --------------------------------
+        // -------------------------------------------------------------------------
         $query->set('posts_per_page', 3);
 
-        // --------------------------------
-        // Sorting: via URL ?sort=
-        // --------------------------------
-        $sort = isset($_GET['sort']) ? sanitize_text_field($_GET['sort']) : 'date_asc';
+        // -------------------------------------------------------------------------
+        // Sorting via URL parameter ?sort=
+        // -------------------------------------------------------------------------
+        $sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : 'date_asc';
 
         switch ($sort) {
             case 'date_desc':
@@ -104,22 +136,22 @@ function ec_set_event_archive_query($query)
                 break;
         }
 
-        // --------------------------------
-        // Taxonomy filter: via ?event_type=
-        // --------------------------------
+        // -------------------------------------------------------------------------
+        // Taxonomy filter via URL parameter ?event_type=
+        // -------------------------------------------------------------------------
         if (! empty($_GET['event_type'])) {
-            $query->set('tax_query', array(
-                array(
+            $query->set('tax_query', [
+                [
                     'taxonomy' => 'event_type',
                     'field'    => 'slug',
-                    'terms'    => sanitize_text_field($_GET['event_type']),
-                ),
-            ));
+                    'terms'    => sanitize_text_field(wp_unslash($_GET['event_type'])),
+                ],
+            ]);
         }
 
-        // --------------------------------
-        // Developer hook
-        // --------------------------------
+        // -------------------------------------------------------------------------
+        // Hook for further customization by developers
+        // -------------------------------------------------------------------------
         do_action('ec_modify_event_archive_query', $query);
     }
 }

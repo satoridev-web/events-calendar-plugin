@@ -21,13 +21,13 @@ A modular, lightweight events calendar plugin built with modern WordPress best p
 
 ```plaintext
 events-calendar-plugin/
-├── admin/                            	# Admin-related functionality (e.g., settings, columns)
-├── assets/                          	# Frontend assets
-│   ├── css/
-│   │   └── events-calendar-plugin.css  # Compiled main stylesheet
-│   ├── js/
-│   │   └── filter-toggle.js         	# JS for filter and view toggles
-│   └── scss/                        	# Source SCSS partials and main stylesheet
+├── admin								# Admin-specific code and settings (if any)
+├── assets								# All plugin assets: stylesheets, scripts, and SCSS source
+│   ├── css
+│   │   └── events-calendar-plugin.css
+│   ├── js
+│   │   └── filter-toggle.js
+│   └── scss							# Sass partials and main entry
 │       ├── _animations.scss
 │       ├── _archive.scss
 │       ├── _base.scss
@@ -36,37 +36,41 @@ events-calendar-plugin/
 │       ├── _mixins.scss
 │       ├── _variables.scss
 │       └── main.scss
-├── includes/                        	# Core PHP includes
-│   ├── forms/                      	# Frontend form handling
-│   │   ├── ec-form-fields.php       	# Form fields definitions
-│   │   ├── ec-form-handler.php      	# Form processing logic
-│   │   └── ec-submission-form.php   	# Frontend submission form
-│   ├── post-types/                  	# Custom post types registration
+├── includes							# Core PHP includes: forms, CPTs, taxonomies, shortcodes, helpers
+│   ├── forms							# Frontend form handlers and fields
+│   │   ├── ec-form-fields.php
+│   │   ├── ec-form-handler.php
+│   │   └── ec-submission-form.php
+│   ├── post-types						# Register custom post types
 │   │   └── ec-register-events-cpt.php
-│   ├── shortcodes/                  	# Shortcode classes
+│   ├── shortcodes						# Shortcode classes and managers
 │   │   ├── class-ec-archive-shortcode.php
 │   │   └── class-ec-shortcode-manager.php
-│   ├── taxonomies/                  	# Custom taxonomy registration
-│   │   └── ec-register-event-categories.php
-│   ├── ec-excerpt-override.php      	# Excerpt customizations
-│   ├── ec-meta-boxes.php            	# Meta box registrations
-│   ├── ec-search-filter.php         	# Search and filter logic
-│   ├── ec-session.php               	# Session handling
-│   └── ec-template-loader.php       	# Template loading helpers
-├── languages/                      	# Localization files (PO/MO)
-├── templates/                      	# Frontend templates
-│   ├── parts/                      	# Template partials
+│   ├── taxonomies						# Custom taxonomies registrations
+│   │   ├── ec-register-event-location-taxonomy.php
+│   │   └── ec-register-event-type-taxonomy.php
+│   ├── ec-excerpt-override.php			# Custom excerpt helper functions
+│   ├── ec-meta-boxes.php				# Meta boxes for event CPT
+│   ├── ec-search-filter.php			# Search and filter logic
+│   ├── ec-session.php					# Session handling helpers
+│   ├── ec-template-functions.php		# Template helper functions
+│   └── ec-template-loader.php			# Template loading overrides
+├── languages							# Translation files (.pot, .mo, .po)
+├── templates							# Frontend template files and partials
+│   ├── parts							# Template parts (filters, view toggles, event cards)
 │   │   ├── ec-archive-filters.php
 │   │   ├── ec-archive-view-toggle.php
 │   │   ├── ec-content-event-card.php
 │   │   └── ec-content-event-list.php
-│   ├── ec-archive-event-shortcode.php
-│   ├── ec-archive-event.php
-│   └── ec-single-event.php
-├── CHANGELOG.md                    	# Plugin change log
-├── LICENSE                        		# License file
-├── README.md                      		# Plugin readme
-└── events-calendar-plugin.php     		# Main plugin bootstrap file
+│   ├── ec-archive-event-shortcode.php	# Shortcode archive template
+│   ├── ec-archive-event.php			# Default archive template
+│   └── ec-single-event.php				# Single event template
+├── CHANGELOG.md						# Plugin changelog file
+├── LICENSE								# Plugin license
+├── README.md							# Plugin README file
+├── events-calendar-plugin.php			# Main plugin bootstrap file
+└── folder-structure.txt				# Text file of plugin folder structure
+
 ---
 
 ## 🚀 Installation

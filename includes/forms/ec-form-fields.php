@@ -1,5 +1,15 @@
 <?php
-// Exit if accessed directly
+
+/**
+ * Define Event Submission Fields
+ *
+ * Returns an array of form fields used in the frontend event submission form.
+ *
+ * @package Satori_EC
+ */
+
+namespace Satori_EC;
+
 defined('ABSPATH') || exit;
 
 /**
@@ -10,8 +20,15 @@ defined('ABSPATH') || exit;
  * - type (text, textarea, date, time, taxonomy)
  * - required (bool)
  * - taxonomy (if type = taxonomy)
+ *
+ * @return array<string, array<string, mixed>>
  */
-function ec_get_event_submission_fields() {
+function ec_get_event_submission_fields(): array
+{
+    // ------------------------------------------------------------------------------
+    // DEFINE: Default field structure for frontend event submission form
+    // ------------------------------------------------------------------------------
+
     $fields = [
         'event_title' => [
             'label'    => __('Event Title', 'events-calendar-plugin'),
@@ -46,9 +63,9 @@ function ec_get_event_submission_fields() {
         ],
     ];
 
-    /**
-     * Filter the event submission fields.
-     * Developers (or Pro add-ons) can add/remove/modify fields using this filter.
-     */
+    // ------------------------------------------------------------------------------
+    // FILTER: Allow other plugins or extensions to modify submission fields
+    // ------------------------------------------------------------------------------
+
     return apply_filters('ec_event_submission_fields', $fields);
 }

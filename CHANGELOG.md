@@ -6,6 +6,30 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+# Changelog
+
+## [1.0.0] - 2025-07-23
+
+### Added
+
+- Registered custom post type 'event' with taxonomies for categories, locations, and event types.
+- Frontend event archive with filters, search, and view toggles.
+- Custom excerpt helper function for event excerpts.
+- Shortcodes for event archive display.
+
+### Fixed
+
+- Corrected taxonomy include paths in core plugin file.
+- Fixed archive query to return correct number of events.
+- Added defensive programming to taxonomy filters to prevent PHP warnings.
+
+### Changed
+
+- Renamed 'region' taxonomy to 'location' for clarity.
+- Moved excerpt helper loading to plugin bootstrap for proper availability.
+
+---
+
 ## [1.0.1-dev] – 2025-07-23
 
 ### Added

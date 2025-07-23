@@ -1,0 +1,52 @@
+.
+├── admin
+├── assets
+│   ├── css
+│   │   └── events-calendar-plugin.css
+│   ├── js
+│   │   └── filter-toggle.js
+│   └── scss
+│       ├── _animations.scss
+│       ├── _archive.scss
+│       ├── _base.scss
+│       ├── _event-single.scss
+│       ├── _form.scss
+│       ├── _mixins.scss
+│       ├── _variables.scss
+│       └── main.scss
+├── includes
+│   ├── forms
+│   │   ├── ec-form-fields.php
+│   │   ├── ec-form-handler.php
+│   │   └── ec-submission-form.php
+│   ├── post-types
+│   │   └── ec-register-events-cpt.php
+│   ├── shortcodes
+│   │   ├── class-ec-archive-shortcode.php
+│   │   └── class-ec-shortcode-manager.php
+│   ├── taxonomies
+│   │   ├── ec-register-event-location-taxonomy.php
+│   │   └── ec-register-event-type-taxonomy.php
+│   ├── ec-excerpt-override.php
+│   ├── ec-meta-boxes.php
+│   ├── ec-search-filter.php
+│   ├── ec-session.php
+│   ├── ec-template-functions.php
+│   └── ec-template-loader.php
+├── languages
+├── templates
+│   ├── parts
+│   │   ├── ec-archive-filters.php
+│   │   ├── ec-archive-view-toggle.php
+│   │   ├── ec-content-event-card.php
+│   │   └── ec-content-event-list.php
+│   ├── ec-archive-event-shortcode.php
+│   ├── ec-archive-event.php
+│   └── ec-single-event.php
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── events-calendar-plugin.php
+└── folder-structure.txt
+
+14 directories, 36 files

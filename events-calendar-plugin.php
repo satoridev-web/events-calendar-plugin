@@ -12,7 +12,7 @@
 
 namespace Satori_EC;
 
-defined('ABSPATH') || exit; // Prevent direct access
+defined('ABSPATH') || exit; // Exit if accessed directly
 
 // --------------------------------------------------
 // Constants
@@ -22,72 +22,80 @@ define('SATORI_EC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SATORI_EC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // --------------------------------------------------
+// Load critical helpers early — used in templates
+// --------------------------------------------------
+require_once SATORI_EC_PLUGIN_DIR . 'includes/ec-excerpt-override.php'; // <== moved here
+
+// --------------------------------------------------
 // Core Plugin Class
 // --------------------------------------------------
 final class Plugin
 {
-
     /**
-     * Shortcode Manager instance
-     *
-     * @var Shortcode_Manager|null
+     * @var Shortcode_Manager|null Instance of shortcode manager
      */
     private $shortcode_manager = null;
 
     /**
-     * Constructor – Hooks into WP lifecycle
+     * Constructor — Setup hooks and initialisation
      */
     public function __construct()
     {
-        // Load modular files
+        // Load core files
         $this->load_includes();
 
-        // Load translations
+        // Internationalisation
         add_action('plugins_loaded', [$this, 'load_textdomain']);
 
-        // Register post type
+        // Register post types & shortcodes
         add_action('init', [$this, 'register_post_type']);
-
-        // Register shortcodes on init hook
         add_action('init', [$this, 'register_shortcodes']);
 
-        // Enqueue styles and scripts
+        // Register frontend assets
         add_action('wp_enqueue_scripts', [$this, 'register_assets']);
 
-        // Modify event archive queries
+        // Filter archive queries
         add_action('pre_get_posts', [$this, 'filter_events_archive']);
     }
 
-    /**
-     * Load all required PHP files
-     */
+    // --------------------------------------------------
+    // Load required plugin files
+    // --------------------------------------------------
     private function load_includes()
     {
+        // --------------------------------------------------
+        // Form handling
+        // --------------------------------------------------
         include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-form-handler.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-form-fields.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-submission-form.php';
+
+        // --------------------------------------------------
+        // Core functionality
+        // --------------------------------------------------
         include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-search-filter.php';
-        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-excerpt-override.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-session.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-meta-boxes.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-template-loader.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/ec-template-functions.php';
 
+        // --------------------------------------------------
+        // Post types and taxonomies
+        // --------------------------------------------------
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/post-types/ec-register-events-cpt.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/taxonomies/ec-register-event-type-taxonomy.php';
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/taxonomies/ec-register-event-location-taxonomy.php';
+
+        // --------------------------------------------------
         // Shortcodes
+        // --------------------------------------------------
         include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-archive-shortcode.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-shortcode-manager.php';
-
-        // Frontend form submission handling (optional)
-        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-submission-form.php';
-
-        // Include CPT registration
-        include_once SATORI_EC_PLUGIN_DIR . 'includes/post-types/ec-register-events-cpt.php';
-
-        // Include taxonomy registration
-        include_once SATORI_EC_PLUGIN_DIR . 'includes/taxonomies/ec-register-event-categories.php';
     }
 
-    /**
-     * Load plugin text domain for translations
-     */
+    // --------------------------------------------------
+    // Load plugin textdomain for translation support
+    // --------------------------------------------------
     public function load_textdomain()
     {
         load_plugin_textdomain(
@@ -97,31 +105,30 @@ final class Plugin
         );
     }
 
-    /**
-     * Register custom post type(s)
-     */
+    // --------------------------------------------------
+    // Register custom post type(s)
+    // --------------------------------------------------
     public function register_post_type()
     {
         ec_register_event_post_type();
     }
 
-    /**
-     * Register shortcodes using the Shortcode Manager class
-     */
+    // --------------------------------------------------
+    // Register shortcodes via manager
+    // --------------------------------------------------
     public function register_shortcodes()
     {
         if (null === $this->shortcode_manager) {
             $this->shortcode_manager = new Shortcode_Manager();
         }
-        // Shortcode_Manager handles shortcode registration internally
     }
 
-    /**
-     * Register frontend CSS and JavaScript
-     */
+    // --------------------------------------------------
+    // Enqueue frontend assets
+    // --------------------------------------------------
     public function register_assets()
     {
-        // Main stylesheet
+        // Core CSS
         wp_enqueue_style(
             'satori-ec-main',
             SATORI_EC_PLUGIN_URL . 'assets/css/events-calendar-plugin.css',
@@ -129,7 +136,7 @@ final class Plugin
             SATORI_EC_VERSION
         );
 
-        // Toggle/filter JavaScript
+        // Frontend filter toggle JS
         wp_enqueue_script(
             'satori-ec-filter-toggle',
             SATORI_EC_PLUGIN_URL . 'assets/js/filter-toggle.js',
@@ -139,48 +146,61 @@ final class Plugin
         );
     }
 
-    /**
-     * Modify WP_Query for event archive filtering
-     */
+    // --------------------------------------------------
+    // Modify main archive queries to support filtering
+    // --------------------------------------------------
     public function filter_events_archive($query)
     {
         if (is_admin() || ! $query->is_main_query()) {
             return;
         }
 
-        if (is_post_type_archive('event') || is_tax('event_type')) {
-            // Keyword search
+        if (is_post_type_archive('event') || is_tax('event_type') || is_tax('event_location')) {
+            // Search filter
             if (!empty($_GET['s'])) {
                 $query->set('s', sanitize_text_field(wp_unslash($_GET['s'])));
             }
 
-            // Taxonomy filter via URL param
+            // Taxonomy filter via ?ec_category
             if (!empty($_GET['ec_category'])) {
                 $query->set('tax_query', [
                     [
                         'taxonomy' => 'event_type',
                         'field'    => 'slug',
                         'terms'    => sanitize_text_field(wp_unslash($_GET['ec_category'])),
-                    ]
+                    ],
                 ]);
             }
 
-            // Pagination control
+            // Location filter via ?ec_location
+            if (!empty($_GET['ec_location'])) {
+                $existing_tax_query = $query->get('tax_query') ?: [];
+
+                $existing_tax_query[] = [
+                    'taxonomy' => 'event_location',
+                    'field'    => 'slug',
+                    'terms'    => sanitize_text_field(wp_unslash($_GET['ec_location'])),
+                ];
+
+                $query->set('tax_query', $existing_tax_query);
+            }
+
+            // Limit archive posts
             $query->set('posts_per_page', 3);
         }
     }
 
-    /**
-     * Activation callback
-     */
+    // --------------------------------------------------
+    // Plugin activation callback
+    // --------------------------------------------------
     public static function activate()
     {
         flush_rewrite_rules();
     }
 
-    /**
-     * Deactivation callback
-     */
+    // --------------------------------------------------
+    // Plugin deactivation callback
+    // --------------------------------------------------
     public static function deactivate()
     {
         flush_rewrite_rules();
@@ -188,14 +208,14 @@ final class Plugin
 }
 
 // --------------------------------------------------
-// Bootstrap Plugin
+// Initialise plugin after plugins_loaded
 // --------------------------------------------------
 add_action('plugins_loaded', function () {
     new Plugin();
 });
 
 // --------------------------------------------------
-// Register Lifecycle Hooks
+// Register lifecycle hooks
 // --------------------------------------------------
 register_activation_hook(__FILE__, ['\Satori_EC\Plugin', 'activate']);
 register_deactivation_hook(__FILE__, ['\Satori_EC\Plugin', 'deactivate']);

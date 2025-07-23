@@ -10,31 +10,31 @@
 
 namespace Satori_EC;
 
+use Satori_EC\EC_Archive_Shortcode;
+
 defined('ABSPATH') || exit; // Exit if accessed directly
 
 final class Shortcode_Manager
 {
-    // ------------------------------------------
+    // --------------------------------------------------
     // Array of shortcode class names to register
-    // ------------------------------------------
+    // --------------------------------------------------
     private $shortcodes = [
         EC_Archive_Shortcode::class,
-        // Add other shortcode classes here as required
+        // Add additional shortcode classes here if needed
     ];
 
-    // ------------------------------------------
-    // Constructor: hook into 'init' to register all shortcodes
-    // ------------------------------------------
+    // --------------------------------------------------
+    // Constructor: Hook into 'init' to register shortcodes
+    // --------------------------------------------------
     public function __construct()
     {
         add_action('init', [$this, 'register_shortcodes']);
     }
 
-    // ------------------------------------------
-    // Register all shortcodes in the $shortcodes array
-    //
-    // Loops through each shortcode class and calls its static register() method
-    // ------------------------------------------
+    // --------------------------------------------------
+    // Loop through all defined shortcode classes and call their register() method
+    // --------------------------------------------------
     public function register_shortcodes()
     {
         foreach ($this->shortcodes as $shortcode_class) {
@@ -45,7 +45,4 @@ final class Shortcode_Manager
     }
 }
 
-// ------------------------------------------
-// Instantiate shortcode manager to trigger shortcode registration
-// ------------------------------------------
-new Shortcode_Manager();
+// Note: This class is instantiated by the main Plugin class — no need to instantiate again here.
