@@ -75,7 +75,14 @@ final class Plugin
         include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-archive-shortcode.php';
         include_once SATORI_EC_PLUGIN_DIR . 'includes/shortcodes/class-ec-shortcode-manager.php';
 
-        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-submission-form.php'; // Optional frontend handler
+        // Frontend form submission handling (optional)
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/forms/ec-submission-form.php';
+
+        // Include CPT registration
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/post-types/ec-register-events-cpt.php';
+
+        // Include taxonomy registration
+        include_once SATORI_EC_PLUGIN_DIR . 'includes/taxonomies/ec-register-event-categories.php';
     }
 
     /**
@@ -95,7 +102,7 @@ final class Plugin
      */
     public function register_post_type()
     {
-        // TODO: Implement register_event_post_type() or similar
+        ec_register_event_post_type();
     }
 
     /**
@@ -106,9 +113,7 @@ final class Plugin
         if (null === $this->shortcode_manager) {
             $this->shortcode_manager = new Shortcode_Manager();
         }
-
-        // The Shortcode_Manager constructor will handle the registration of all shortcodes,
-        // so no need to call any additional methods here.
+        // Shortcode_Manager handles shortcode registration internally
     }
 
     /**
@@ -119,7 +124,7 @@ final class Plugin
         // Main stylesheet
         wp_enqueue_style(
             'satori-ec-main',
-            SATORI_EC_PLUGIN_URL . 'assets/css/main.css',
+            SATORI_EC_PLUGIN_URL . 'assets/css/events-calendar-plugin.css',
             [],
             SATORI_EC_VERSION
         );
@@ -143,17 +148,17 @@ final class Plugin
             return;
         }
 
-        if (is_post_type_archive('event') || is_tax('event_category')) {
+        if (is_post_type_archive('event') || is_tax('event_type')) {
             // Keyword search
             if (!empty($_GET['s'])) {
                 $query->set('s', sanitize_text_field(wp_unslash($_GET['s'])));
             }
 
-            // Category filter via URL param
+            // Taxonomy filter via URL param
             if (!empty($_GET['ec_category'])) {
                 $query->set('tax_query', [
                     [
-                        'taxonomy' => 'event_category',
+                        'taxonomy' => 'event_type',
                         'field'    => 'slug',
                         'terms'    => sanitize_text_field(wp_unslash($_GET['ec_category'])),
                     ]
