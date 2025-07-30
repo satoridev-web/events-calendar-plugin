@@ -1,7 +1,12 @@
-// _mixins.scss
-// Satori Graphics - Common Mixins for Events Calendar Plugin
+/* -------------------------------------------------
+ * Common Mixins for Events Calendar Plugin
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
 
-// Flex center helper
+/* -------------------------------------------------
+ * Flex Center Helper
+ * Usage: @include flex-center();
+ * -------------------------------------------------*/
 @mixin flex-center($direction: row, $justify: center, $align: center) {
   display: flex;
   flex-direction: $direction;
@@ -9,31 +14,47 @@
   align-items: $align;
 }
 
-// Transition helper
+/* -------------------------------------------------
+ * Transition Helper
+ * Usage: @include transition-fast();
+ * -------------------------------------------------*/
 @mixin transition-fast($properties: all, $duration: 0.2s, $timing: ease) {
   transition: $properties $duration $timing;
 }
 
-// Media queries
+/* -------------------------------------------------
+ * Media Query: Medium Breakpoint
+ * Usage: @include respond-medium { ... }
+ * -------------------------------------------------*/
 @mixin respond-medium {
   @media (max-width: $bp-medium) {
     @content;
   }
 }
 
+/* -------------------------------------------------
+ * Media Query: Small Breakpoint
+ * Usage: @include respond-small { ... }
+ * -------------------------------------------------*/
 @mixin respond-small {
   @media (max-width: $bp-small) {
     @content;
   }
 }
 
-// Fade-in-up animation
+/* -------------------------------------------------
+ * Fade-in-up Animation Mixin
+ * Usage: @include fade-in-up();
+ * -------------------------------------------------*/
 @mixin fade-in-up($distance: 10px, $duration: 0.3s, $timing: ease-out) {
   opacity: 0;
   transform: translateY($distance);
   animation: fadeInUp $duration $timing forwards;
 }
 
+/* -------------------------------------------------
+ * Keyframes: fadeInUp
+ * -------------------------------------------------*/
 @keyframes fadeInUp {
   to {
     opacity: 1;

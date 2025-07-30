@@ -1,5 +1,7 @@
-// _base.scss
-// Satori Graphics - Base styles for Events Calendar Plugin
+/* -------------------------------------------------
+ * Base styles for Events Calendar Plugin
+ * Satori Graphics
+ * -------------------------------------------------*/
 
 .ec-event-wrapper {
   max-width: 800px;
@@ -11,6 +13,10 @@
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
   font-family: $font-stack;
 }
+
+/* -------------------------------------------------
+ * Event title styles
+ * -------------------------------------------------*/
 
 .ec-event-title {
   margin-bottom: $gap-md;

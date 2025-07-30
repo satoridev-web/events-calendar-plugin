@@ -1,10 +1,36 @@
-// main.scss
-// Satori Graphics - Master Sass Import File
+/* -------------------------------------------------
+ * Satori Graphics – Master Sass Import File
+ * Purpose: Global SCSS loader for Events Calendar Plugin
+ * Author: Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
 
-@import 'variables';
-@import 'mixins';
-@import 'animations';
-@import 'base';
-@import 'form';
-@import 'event-single';
-@import 'archive';
+/* -------------------------------------------------
+ * Variables & Mixins
+ * -------------------------------------------------*/
+@import "variables";
+@import "mixins";
+
+/* -------------------------------------------------
+  * Animation Utilities
+  * -------------------------------------------------*/
+@import "animations";
+
+/* -------------------------------------------------
+  * Base Styles (Reset, Typography, Layout)
+  * -------------------------------------------------*/
+@import "base";
+
+/* -------------------------------------------------
+  * Frontend Submission Form
+  * -------------------------------------------------*/
+@import "form";
+
+/* -------------------------------------------------
+  * Single Event Template
+  * -------------------------------------------------*/
+@import "event-single";
+
+/* -------------------------------------------------
+  * Archive Views (Grid & List)
+  * -------------------------------------------------*/
+@import "archive";

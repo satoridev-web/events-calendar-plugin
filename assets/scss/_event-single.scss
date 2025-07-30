@@ -1,5 +1,7 @@
-// _event-single.scss
-// Satori Graphics - Single Event Page Styling
+/* -------------------------------------------------
+ * Single Event Page Styling
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
 
 .ec-event-thumbnail,
 .ec-event-featured-image {
@@ -14,6 +16,9 @@
   }
 }
 
+/* -------------------------------------------------
+  * Event Meta and Details Section
+  * -------------------------------------------------*/
 .ec-event-meta,
 .ec-event-details {
   margin-top: $gap-lg;
@@ -46,6 +51,9 @@
   }
 }
 
+/* -------------------------------------------------
+  * Event Content Body
+  * -------------------------------------------------*/
 .ec-event-content {
   margin-top: 2rem;
   color: $color-text-dark;

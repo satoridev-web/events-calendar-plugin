@@ -1,5 +1,7 @@
-// _form.scss
-// Satori Graphics - Event submission form styles
+/* -------------------------------------------------
+ * Event Submission Form Styles
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
 
 .ec-event-submission-form {
   max-width: 700px;
@@ -55,6 +57,9 @@
   }
 }
 
+/* -------------------------------------------------
+ * Generic Button Styles
+ * -------------------------------------------------*/
 button {
   background-color: #0073aa;
   color: #fff;
@@ -68,8 +73,9 @@ button {
   }
 }
 
-
-// Form success and error messages
+/* -------------------------------------------------
+ * Form Success and Error Messages
+ * -------------------------------------------------*/
 .ec-success,
 .ec-error {
   margin-top: 1rem;

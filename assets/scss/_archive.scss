@@ -1,6 +1,11 @@
-// _archive.scss
-// Satori Graphics - Archive View (Grid + List + Filters)
+/* -------------------------------------------------
+ * Styles for archive views (grid + list + filters)
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
 
+/* -------------------------------------------------
+ * Archive Wrapper & Title
+ * -------------------------------------------------*/
 .ec-archive-wrapper {
   max-width: 1200px;
   margin: 3rem auto;
@@ -14,7 +19,9 @@
   color: $color-text-dark;
 }
 
-/* Grid layout */
+/* -------------------------------------------------
+ * Grid Layout
+ * -------------------------------------------------*/
 .ec-archive-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -26,7 +33,9 @@
   box-sizing: border-box;
 }
 
-/* Card */
+/* -------------------------------------------------
+ * Grid: Card
+ * -------------------------------------------------*/
 .ec-archive-card {
   position: relative;
   background: $color-white;
@@ -51,7 +60,9 @@
   }
 }
 
-/* Date ribbon */
+/* -------------------------------------------------
+ * Grid: Date Ribbon
+ * -------------------------------------------------*/
 .ec-event-date-ribbon {
   position: absolute;
   top: 0;
@@ -64,7 +75,9 @@
   border-bottom-right-radius: $border-radius;
 }
 
-/* Content */
+/* -------------------------------------------------
+ * Grid: Card Content
+ * -------------------------------------------------*/
 .ec-archive-card-content {
   padding: 1.25rem;
   flex: 1;
@@ -119,7 +132,9 @@
   }
 }
 
-/* List layout */
+/* -------------------------------------------------
+ * List Layout
+ * -------------------------------------------------*/
 .ec-archive-list {
   display: flex;
   flex-direction: column;
@@ -172,7 +187,9 @@
   color: $color-text-muted;
 }
 
-// Responsive list
+/* -------------------------------------------------
+ * Responsive: List View
+ * -------------------------------------------------*/
 @include respond-small {
   .ec-list-card {
     flex-direction: column;

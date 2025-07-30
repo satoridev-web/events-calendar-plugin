@@ -1,7 +1,11 @@
-// _variables.scss
-// Satori Graphics - Variables for Events Calendar Plugin
+/* -------------------------------------------------
+ * Variables for Events Calendar Plugin
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
 
-// Colors
+/* -------------------------------------------------
+ * Colors
+ * -------------------------------------------------*/
 $color-primary: #0073aa;
 $color-primary-dark: #005177;
 $color-text-dark: #222;
@@ -18,12 +22,17 @@ $color-gray-light: #ccc;
 $color-gray-lighter: #eee;
 $color-gray-muted: #aaaaaa;
 $color-white: #fff;
-$color-shadow: rgba(0,0,0,0.06);
+$color-shadow: rgba(0, 0, 0, 0.06);
 
-// Fonts & Typography
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* -------------------------------------------------
+  * Fonts & Typography
+  * -------------------------------------------------*/
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  Arial, sans-serif;
 
-// Spacing
+/* -------------------------------------------------
+  * Spacing & Border Radius
+  * -------------------------------------------------*/
 $gap-xs: 0.25rem;
 $gap-sm: 0.5rem;
 $gap-md: 1rem;
@@ -33,6 +42,8 @@ $padding-section: 1.5rem;
 $border-radius: 6px;
 $border-radius-lg: 10px;
 
-// Breakpoints
+/* -------------------------------------------------
+  * Breakpoints
+  * -------------------------------------------------*/
 $bp-medium: 900px;
 $bp-small: 600px;
