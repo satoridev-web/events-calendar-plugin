@@ -1,0 +1,60 @@
+.
+├── admin
+│   └── class-satori-events-tools-page.php
+├── assets
+│   ├── css
+│   │   ├── satori-events-main-legacy.css
+│   │   ├── satori-events-main.css
+│   │   └── satori-events-main.css.map
+│   ├── js
+│   │   ├── satori-events-ajax.js
+│   │   ├── satori-events-filter-toggle.js
+│   │   └── satori-events-tools.js
+│   └── scss
+│       ├── _animations.scss
+│       ├── _archive.scss
+│       ├── _base.scss
+│       ├── _event-single.scss
+│       ├── _form.scss
+│       ├── _mixins.scss
+│       ├── _variables.scss
+│       └── satori-events-main.scss
+├── includes
+│   ├── ajax
+│   │   └── class-satori-events-ajax-handler.php
+│   ├── forms
+│   │   ├── satori-events-form-fields.php
+│   │   ├── satori-events-form-handler.php
+│   │   └── satori-events-submission-form.php
+│   ├── post-types
+│   │   └── satori-events-register-events-cpt.php
+│   ├── shortcodes
+│   │   ├── class-satori-events-archive-shortcode.php
+│   │   └── class-satori-events-shortcode-manager.php
+│   ├── taxonomies
+│   │   ├── satori-events-register-event-location-taxonomy.php
+│   │   └── satori-events-register-event-type-taxonomy.php
+│   ├── satori-events-excerpt-override.php
+│   ├── satori-events-meta-boxes.php
+│   ├── satori-events-search-filter.php
+│   ├── satori-events-session.php
+│   ├── satori-events-template-functions.php
+│   └── satori-events-template-loader.php
+├── languages
+├── templates
+│   ├── parts
+│   │   ├── satori-events-archive-filters.php
+│   │   ├── satori-events-archive-view-toggle.php
+│   │   ├── satori-events-content-event-card.php
+│   │   └── satori-events-content-event-list.php
+│   ├── satori-events-archive-event-shortcode.php
+│   ├── satori-events-archive-event.php
+│   └── satori-events-single-event.php
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── SATORI-PLUGIN-NAMING-GUIDE.md
+├── satori-events-folder-structure.txt
+└── satori-events.php
+
+15 directories, 43 files

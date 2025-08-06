@@ -7,11 +7,11 @@ A modular, lightweight events calendar plugin built with modern WordPress best p
 ## 🔧 Features
 
 - Custom Post Type: `event`
-- Shortcode archive layout: `[ec_event_archive]`
+- Shortcode archive layout: `[satori_events_event_archive]`
 - Grid/List view toggle
 - Date, keyword, and taxonomy filters
 - Responsive, minimal SCSS-based styling
-- Modular file architecture using `ec-*` prefixes
+- Modular file architecture using `satori-*` prefixes
 - Built with namespaced PHP class architecture
 - Addon-ready design (form builders, taxonomies, metadata, etc.)
 
@@ -19,12 +19,12 @@ A modular, lightweight events calendar plugin built with modern WordPress best p
 
 ## 📁 Folder Structure
 
-```plaintext
+````plaintext
 events-calendar-plugin/
 ├── admin								# Admin-specific code and settings (if any)
 ├── assets								# All plugin assets: stylesheets, scripts, and SCSS source
 │   ├── css
-│   │   └── events-calendar-plugin.css
+│   │   └── satori-style.css
 │   ├── js
 │   │   └── filter-toggle.js
 │   └── scss							# Sass partials and main entry
@@ -38,33 +38,33 @@ events-calendar-plugin/
 │       └── main.scss
 ├── includes							# Core PHP includes: forms, CPTs, taxonomies, shortcodes, helpers
 │   ├── forms							# Frontend form handlers and fields
-│   │   ├── ec-form-fields.php
-│   │   ├── ec-form-handler.php
-│   │   └── ec-submission-form.php
+│   │   ├── satori-form-fields.php
+│   │   ├── satori-form-handler.php
+│   │   └── satori-submission-form.php
 │   ├── post-types						# Register custom post types
-│   │   └── ec-register-events-cpt.php
+│   │   └── satori-register-events-cpt.php
 │   ├── shortcodes						# Shortcode classes and managers
-│   │   ├── class-ec-archive-shortcode.php
-│   │   └── class-ec-shortcode-manager.php
+│   │   ├── class-satori-archive-shortcode.php
+│   │   └── class-satori-shortcode-manager.php
 │   ├── taxonomies						# Custom taxonomies registrations
-│   │   ├── ec-register-event-location-taxonomy.php
-│   │   └── ec-register-event-type-taxonomy.php
-│   ├── ec-excerpt-override.php			# Custom excerpt helper functions
-│   ├── ec-meta-boxes.php				# Meta boxes for event CPT
-│   ├── ec-search-filter.php			# Search and filter logic
-│   ├── ec-session.php					# Session handling helpers
-│   ├── ec-template-functions.php		# Template helper functions
-│   └── ec-template-loader.php			# Template loading overrides
+│   │   ├── satori-register-event-location-taxonomy.php
+│   │   └── satori-register-event-type-taxonomy.php
+│   ├── satori-excerpt-override.php			# Custom excerpt helper functions
+│   ├── satori-meta-boxes.php				# Meta boxes for event CPT
+│   ├── satori-search-filter.php			# Search and filter logic
+│   ├── satori-session.php					# Session handling helpers
+│   ├── satori-template-functions.php		# Template helper functions
+│   └── satori-template-loader.php			# Template loading overrides
 ├── languages							# Translation files (.pot, .mo, .po)
 ├── templates							# Frontend template files and partials
 │   ├── parts							# Template parts (filters, view toggles, event cards)
-│   │   ├── ec-archive-filters.php
-│   │   ├── ec-archive-view-toggle.php
-│   │   ├── ec-content-event-card.php
-│   │   └── ec-content-event-list.php
-│   ├── ec-archive-event-shortcode.php	# Shortcode archive template
-│   ├── ec-archive-event.php			# Default archive template
-│   └── ec-single-event.php				# Single event template
+│   │   ├── satori-archive-filters.php
+│   │   ├── satori-archive-view-toggle.php
+│   │   ├── satori-content-event-card.php
+│   │   └── satori-content-event-list.php
+│   ├── satori-archive-event-shortcode.php	# Shortcode archive template
+│   ├── satori-archive-event.php			# Default archive template
+│   └── satori-single-event.php				# Single event template
 ├── CHANGELOG.md						# Plugin changelog file
 ├── LICENSE								# Plugin license
 ├── README.md							# Plugin README file
@@ -78,19 +78,21 @@ events-calendar-plugin/
 1. Download or clone the plugin into your `wp-content/plugins/` directory:
    ```bash
    git clone https://github.com/satoridev-web/events-calendar-plugin.git
-   ```
+````
+
 2. Activate the plugin in your WordPress admin.
-3. Add `[ec_event_archive]` to any page to render the archive view.
+3. Add `[satori_events_event_archive]` to any page to render the archive view.
 
 ---
 
 ## 🧩 Shortcodes
 
-### `[ec_event_archive]`
+### `[satori_events_event_archive]`
 
 Displays a filterable, toggleable archive of published events.
 
 Supports:
+
 - Grid/List views
 - Taxonomy and keyword filters
 - Clean HTML structure for custom theming
@@ -110,6 +112,7 @@ Supports:
 The plugin is designed to be extended via optional addons that can work independently or alongside the core plugin.
 
 Addon examples include:
+
 - Form builder integrations
 - Advanced taxonomy systems
 - Additional metadata fields
@@ -120,8 +123,8 @@ Addon examples include:
 ## 📌 Development Notes
 
 - All plugin logic is namespaced under `Satori_EC\` to avoid global conflicts.
-- File naming is consistently prefixed with `ec-` for clarity and maintainability.
-- SCSS is modular and compiled into `ec-style.css` with versioned cache busting.
+- File naming is consistently prefixed with `satori-` for clarity and maintainability.
+- SCSS is modular and compiled into `satori-style.css` with versioned cache busting.
 - Addon files should follow the same naming and folder structure conventions.
 - Future support planned for internationalization and admin settings.
 

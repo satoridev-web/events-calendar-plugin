@@ -8,20 +8,20 @@
  * @package Satori_EC
  */
 
-namespace Satori_EC;
+namespace Satori_Events;
 
 defined('ABSPATH') || exit;
 
 // =============================================================================
 // Define the relative template folder path inside themes
 // =============================================================================
-function ec_get_template_path(): string
+function satori_events_get_template_path(): string
 {
-    return apply_filters('ec_template_path', 'events-calendar-plugin/');
+    return apply_filters('satori_events_template_path', 'events-calendar-plugin/');
 }
 
 // =============================================================================
-// ec_get_template()
+// satori_events_get_template()
 // Load a template file from theme override or fallback to plugin template
 //
 // @param string $template_name Filename of the template to load.
@@ -29,14 +29,14 @@ function ec_get_template_path(): string
 // @param string $template_path Relative path in the theme to look for templates.
 // @param string $default_path  Absolute path fallback directory (plugin templates).
 // =============================================================================
-function ec_get_template(string $template_name, array $args = [], string $template_path = '', string $default_path = ''): void
+function satori_events_get_template(string $template_name, array $args = [], string $template_path = '', string $default_path = ''): void
 {
     if (! $template_name) {
         return;
     }
 
     // Use provided template path or default theme override folder
-    $template_path = $template_path ?: ec_get_template_path();
+    $template_path = $template_path ?: satori_events_get_template_path();
 
     // Default plugin templates path
     $default_path = $default_path ?: plugin_dir_path(__DIR__) . 'templates/';
@@ -60,7 +60,7 @@ function ec_get_template(string $template_name, array $args = [], string $templa
      * @param string $template_path  Relative theme path.
      * @param string $default_path   Plugin fallback path.
      */
-    $template = apply_filters('ec_get_template', $template, $template_name, $args, $template_path, $default_path);
+    $template = apply_filters('satori_events_get_template', $template, $template_name, $args, $template_path, $default_path);
 
     // Extract variables for use inside template safely
     if (! empty($args) && is_array($args)) {
@@ -76,7 +76,7 @@ function ec_get_template(string $template_name, array $args = [], string $templa
          *
          * @param string $template_name Missing template filename.
          */
-        do_action('ec_template_missing', $template_name);
+        do_action('satori_events_template_missing', $template_name);
 
         // Debug info in WP_DEBUG mode
         if (defined('WP_DEBUG') && WP_DEBUG) {
@@ -86,7 +86,7 @@ function ec_get_template(string $template_name, array $args = [], string $templa
 }
 
 // =============================================================================
-// ec_get_template_part()
+// satori_events_get_template_part()
 // Load partial templates (e.g., content-event-card.php)
 // Similar to get_template_part(), with optional variables
 //
@@ -94,9 +94,9 @@ function ec_get_template(string $template_name, array $args = [], string $templa
 // @param string $name Optional additional template part name.
 // @param array  $args Optional associative array of variables to extract.
 // =============================================================================
-function ec_get_template_part(string $slug, string $name = '', array $args = []): void
+function satori_events_get_template_part(string $slug, string $name = '', array $args = []): void
 {
-    $template_path = ec_get_template_path();
+    $template_path = satori_events_get_template_path();
     $default_path  = plugin_dir_path(__DIR__) . 'templates/';
 
     // Build possible template filenames
@@ -134,7 +134,7 @@ function ec_get_template_part(string $slug, string $name = '', array $args = [])
      * @param string $slug Template slug.
      * @param string $name Template part name.
      */
-    do_action('ec_template_missing_part', $slug, $name);
+    do_action('satori_events_template_missing_part', $slug, $name);
 
     // Debug output if WP_DEBUG enabled
     if (defined('WP_DEBUG') && WP_DEBUG) {

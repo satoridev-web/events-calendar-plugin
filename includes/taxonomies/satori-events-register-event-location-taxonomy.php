@@ -2,12 +2,12 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-// --------------------------------------------------
-// Register Custom Taxonomy: Event Location
-// --------------------------------------------------
-function ec_register_event_location_taxonomy()
+/* -------------------------------------------------
+ * Register Custom Taxonomy: Event Location
+ * -------------------------------------------------*/
+function satori_events_register_event_location_taxonomy(): void
 {
-    $labels = array(
+    $labels = [
         'name'              => __('Event Locations', 'events-calendar-plugin'),
         'singular_name'     => __('Event Location', 'events-calendar-plugin'),
         'search_items'      => __('Search Event Locations', 'events-calendar-plugin'),
@@ -19,17 +19,21 @@ function ec_register_event_location_taxonomy()
         'add_new_item'      => __('Add New Location', 'events-calendar-plugin'),
         'new_item_name'     => __('New Location Name', 'events-calendar-plugin'),
         'menu_name'         => __('Event Locations', 'events-calendar-plugin'),
-    );
+    ];
 
-    $args = array(
+    $args = [
         'hierarchical'      => true,
         'labels'            => $labels,
         'show_ui'           => true,
         'show_admin_column' => true,
-        'rewrite'           => array('slug' => 'event-location'),
+        'rewrite'           => ['slug' => 'event-location'],
         'show_in_rest'      => true,
-    );
+    ];
 
-    register_taxonomy('event_location', array('event'), $args);
+    register_taxonomy('event_location', ['event'], $args);
 }
-add_action('init', 'ec_register_event_location_taxonomy');
+
+/* -------------------------------------------------
+ * Hook taxonomy registration into 'init'
+ * -------------------------------------------------*/
+add_action('init', 'satori_events_register_event_location_taxonomy');

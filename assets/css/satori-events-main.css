@@ -1,0 +1,474 @@
+@charset "UTF-8";
+/* -------------------------------------------------
+ * Satori Graphics – Master Sass Import File
+ * Purpose: Global SCSS loader for Events Calendar Plugin
+ * Author: Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Variables & Mixins
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Variables for Events Calendar Plugin
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Colors
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+  * Fonts & Typography
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+  * Spacing & Border Radius
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+  * Breakpoints
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Common Mixins for Events Calendar Plugin
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Flex Center Helper
+ * Usage: @include flex-center();
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Transition Helper
+ * Usage: @include transition-fast();
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Media Query: Medium Breakpoint
+ * Usage: @include respond-medium { ... }
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Media Query: Small Breakpoint
+ * Usage: @include respond-small { ... }
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Fade-in-up Animation Mixin
+ * Usage: @include fade-in-up();
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Keyframes: fadeInUp
+ * -------------------------------------------------*/
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* -------------------------------------------------
+  * Animation Utilities
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Custom event card animations for the plugin
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Slide-In Animation
+ * Note: A future enhancement; not currently in use.
+ * Already included in _mixins.scss as fadeInUp.
+ * -------------------------------------------------*/
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* -------------------------------------------------
+ * Slide-In Mixin
+ * Usage: @include slide-in(); with optional duration override.
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+  * Base Styles (Reset, Typography, Layout)
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Base styles for Events Calendar Plugin
+ * Satori Graphics
+ * -------------------------------------------------*/
+.satori-events-wrapper {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  line-height: 1.6;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* -------------------------------------------------
+ * Event title styles
+ * -------------------------------------------------*/
+.satori-events-title {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #222;
+}
+
+/* -------------------------------------------------
+  * Frontend Submission Form
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Event Submission Form Styles
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+.satori-events-submission-form {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #f6f7fd;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.satori-events-submission-form * {
+  box-sizing: border-box;
+}
+.satori-events-submission-form p {
+  margin-bottom: 1.25rem;
+}
+.satori-events-submission-form label {
+  font-weight: 500;
+  color: #222;
+}
+.satori-events-submission-form input[type=text],
+.satori-events-submission-form input[type=date],
+.satori-events-submission-form input[type=time],
+.satori-events-submission-form input[type=file],
+.satori-events-submission-form select,
+.satori-events-submission-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.satori-events-submission-form button[type=submit] {
+  display: block;
+  width: 100%;
+  margin: 2.5rem auto 0;
+  background-color: #0073aa;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.satori-events-submission-form button[type=submit]:hover {
+  background-color: #005177;
+}
+
+/* -------------------------------------------------
+ * Generic Button Styles
+ * -------------------------------------------------*/
+button {
+  background-color: #0073aa;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #005177;
+}
+
+/* -------------------------------------------------
+ * Form Success and Error Messages
+ * -------------------------------------------------*/
+.satori-events-success,
+.satori-events-error {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-left: 5px solid;
+}
+
+.satori-events-success {
+  background-color: #e6ffed;
+  border-color: #38a169;
+  color: #22543d;
+}
+
+.satori-events-error {
+  background-color: #ffe6e6;
+  border-color: #e53e3e;
+  color: #742a2a;
+}
+
+/* -------------------------------------------------
+  * Single Event Template
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Single Event Page Styling
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+.satori-events-thumbnail,
+.satori-events-featured-image {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.satori-events-thumbnail img,
+.satori-events-featured-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* -------------------------------------------------
+  * Event Meta and Details Section
+  * -------------------------------------------------*/
+.satori-events-meta,
+.satori-events-details {
+  margin-top: 1.5rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+.satori-events-meta p,
+.satori-events-details p {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin: 0.25em 0;
+}
+.satori-events-meta strong,
+.satori-events-details strong {
+  min-width: 115px;
+  font-weight: 600;
+  flex-shrink: 0;
+  color: #333;
+}
+@media (max-width: 600px) {
+  .satori-events-meta p,
+  .satori-events-details p {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .satori-events-meta strong,
+  .satori-events-details strong {
+    min-width: auto;
+  }
+}
+
+/* -------------------------------------------------
+  * Event Content Body
+  * -------------------------------------------------*/
+.satori-events-content {
+  margin-top: 2rem;
+  color: #222;
+  font-size: 1rem;
+}
+
+/* -------------------------------------------------
+  * Archive Views (Grid & List)
+  * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Styles for archive views (grid + list + filters)
+ * Satori Graphics Pty Ltd
+ * -------------------------------------------------*/
+/* -------------------------------------------------
+ * Archive Wrapper & Title
+ * -------------------------------------------------*/
+.satori-events-archive-wrapper {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.satori-events-archive-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+/* -------------------------------------------------
+ * Grid Layout
+ * -------------------------------------------------*/
+.satori-events-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------
+ * Grid: Card
+ * -------------------------------------------------*/
+.satori-events-archive-card {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.satori-events-archive-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.satori-events-archive-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+
+/* -------------------------------------------------
+ * Grid: Date Ribbon
+ * -------------------------------------------------*/
+.satori-events-date-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #0073aa;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-bottom-right-radius: 6px;
+}
+
+/* -------------------------------------------------
+ * Grid: Card Content
+ * -------------------------------------------------*/
+.satori-events-archive-card-content {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.satori-events-archive-card-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #222;
+}
+
+.satori-events-excerpt {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.satori-events-tags {
+  margin-top: 1rem;
+  text-align: center;
+}
+.satori-events-tags span {
+  margin: 0.25rem;
+  color: #aaaaaa;
+}
+
+.satori-events-card-meta {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #0073aa;
+  margin-bottom: 0.75rem;
+}
+
+.satori-events-read-more {
+  margin-top: auto;
+  display: inline-block;
+  text-decoration: none;
+  color: #0073aa;
+  font-weight: 600;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+.satori-events-read-more:hover {
+  color: #005177;
+}
+
+/* -------------------------------------------------
+ * List Layout
+ * -------------------------------------------------*/
+.satori-events-archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.satori-events-list-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  align-items: flex-start;
+}
+
+.satori-events-list-date {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0073aa;
+  min-width: 100px;
+  text-align: center;
+  background: #f0f8ff;
+  padding: 0.5rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.satori-events-list-content {
+  flex: 1;
+}
+
+.satori-events-list-title {
+  font-size: 1.2rem;
+  margin: 0 0 0.3rem;
+}
+.satori-events-list-title a {
+  color: #222;
+  text-decoration: none;
+}
+.satori-events-list-title a:hover {
+  color: #0073aa;
+}
+
+.satori-events-list-excerpt {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* -------------------------------------------------
+ * Responsive: List View
+ * -------------------------------------------------*/
+@media (max-width: 600px) {
+  .satori-events-list-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .satori-events-list-date {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+}/*# sourceMappingURL=satori-events-main.css.map */

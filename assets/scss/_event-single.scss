@@ -3,8 +3,8 @@
  * Satori Graphics Pty Ltd
  * -------------------------------------------------*/
 
-.ec-event-thumbnail,
-.ec-event-featured-image {
+.satori-events-thumbnail,
+.satori-events-featured-image {
   margin: $gap-lg 0;
   text-align: center;
 
@@ -19,8 +19,8 @@
 /* -------------------------------------------------
   * Event Meta and Details Section
   * -------------------------------------------------*/
-.ec-event-meta,
-.ec-event-details {
+.satori-events-meta,
+.satori-events-details {
   margin-top: $gap-lg;
   border-top: 1px solid $color-gray-lighter;
   padding-top: $gap-md;
@@ -54,7 +54,7 @@
 /* -------------------------------------------------
   * Event Content Body
   * -------------------------------------------------*/
-.ec-event-content {
+.satori-events-content {
   margin-top: 2rem;
   color: $color-text-dark;
   font-size: 1rem;

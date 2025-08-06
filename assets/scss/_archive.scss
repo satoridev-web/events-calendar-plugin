@@ -6,13 +6,13 @@
 /* -------------------------------------------------
  * Archive Wrapper & Title
  * -------------------------------------------------*/
-.ec-archive-wrapper {
+.satori-events-archive-wrapper {
   max-width: 1200px;
   margin: 3rem auto;
   padding: 0 1rem;
 }
 
-.ec-archive-title {
+.satori-events-archive-title {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 2rem;
@@ -22,7 +22,7 @@
 /* -------------------------------------------------
  * Grid Layout
  * -------------------------------------------------*/
-.ec-archive-grid {
+.satori-events-archive-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
@@ -36,7 +36,7 @@
 /* -------------------------------------------------
  * Grid: Card
  * -------------------------------------------------*/
-.ec-archive-card {
+.satori-events-archive-card {
   position: relative;
   background: $color-white;
   border-radius: $border-radius-lg;
@@ -47,7 +47,7 @@
   @include fade-in-up;
 }
 
-.ec-archive-image {
+.satori-events-archive-image {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -63,7 +63,7 @@
 /* -------------------------------------------------
  * Grid: Date Ribbon
  * -------------------------------------------------*/
-.ec-event-date-ribbon {
+.satori-events-date-ribbon {
   position: absolute;
   top: 0;
   left: 0;
@@ -78,7 +78,7 @@
 /* -------------------------------------------------
  * Grid: Card Content
  * -------------------------------------------------*/
-.ec-archive-card-content {
+.satori-events-archive-card-content {
   padding: 1.25rem;
   flex: 1;
   display: flex;
@@ -86,7 +86,7 @@
   justify-content: space-between;
 }
 
-.ec-archive-card-title {
+.satori-events-archive-card-title {
   text-align: center;
   font-size: 1.25rem;
   font-weight: 600;
@@ -94,14 +94,14 @@
   color: $color-text-dark;
 }
 
-.ec-event-excerpt {
+.satori-events-excerpt {
   text-align: center;
   font-size: 0.95rem;
   color: $color-text-muted;
   line-height: 1.5;
 }
 
-.ec-event-tags {
+.satori-events-tags {
   margin-top: 1rem;
   text-align: center;
 
@@ -111,14 +111,14 @@
   }
 }
 
-.ec-event-card-meta {
+.satori-events-card-meta {
   text-align: center;
   font-size: 0.9rem;
   color: $color-primary;
   margin-bottom: 0.75rem;
 }
 
-.ec-event-read-more {
+.satori-events-read-more {
   margin-top: auto;
   display: inline-block;
   text-decoration: none;
@@ -135,13 +135,13 @@
 /* -------------------------------------------------
  * List Layout
  * -------------------------------------------------*/
-.ec-archive-list {
+.satori-events-archive-list {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.ec-list-card {
+.satori-events-list-card {
   display: flex;
   gap: 1rem;
   padding: 1rem;
@@ -152,7 +152,7 @@
   align-items: flex-start;
 }
 
-.ec-list-date {
+.satori-events-list-date {
   font-size: 1.1rem;
   font-weight: bold;
   color: $color-primary;
@@ -164,11 +164,11 @@
   flex-shrink: 0;
 }
 
-.ec-list-content {
+.satori-events-list-content {
   flex: 1;
 }
 
-.ec-list-title {
+.satori-events-list-title {
   font-size: 1.2rem;
   margin: 0 0 0.3rem;
 
@@ -182,7 +182,7 @@
   }
 }
 
-.ec-list-excerpt {
+.satori-events-list-excerpt {
   font-size: 0.95rem;
   color: $color-text-muted;
 }
@@ -191,12 +191,12 @@
  * Responsive: List View
  * -------------------------------------------------*/
 @include respond-small {
-  .ec-list-card {
+  .satori-events-list-card {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .ec-list-date {
+  .satori-events-list-date {
     margin-bottom: 0.5rem;
     width: 100%;
   }

@@ -8,14 +8,14 @@
  * @package Satori_EC
  */
 
-namespace Satori_EC;
+namespace Satori_Events;
 
 defined('ABSPATH') || exit;
 
-// ============================================================================
-// FILTER: Replace default excerpt "more" symbol
-// ============================================================================
-add_filter('excerpt_more', __NAMESPACE__ . '\\ec_custom_excerpt_more', 999);
+/* -------------------------------------------------
+ * FILTER: Replace default excerpt "more" symbol
+ * -------------------------------------------------*/
+add_filter('excerpt_more', __NAMESPACE__ . '\\satori_events_custom_excerpt_more', 999);
 
 /**
  * Replace default excerpt "read more" text with simple ellipsis.
@@ -23,14 +23,14 @@ add_filter('excerpt_more', __NAMESPACE__ . '\\ec_custom_excerpt_more', 999);
  * @param string $more Original more string.
  * @return string Modified more string.
  */
-function ec_custom_excerpt_more($more): string
+function satori_events_custom_excerpt_more(string $more): string
 {
     return '…';
 }
 
-// ============================================================================
-// REMOVE: Theme-specific excerpt filters (if applied and exist)
-// ============================================================================
+/* -------------------------------------------------
+ * REMOVE: Theme-specific excerpt filters (if applied and exist)
+ * -------------------------------------------------*/
 if (function_exists('twentytwentyfour_excerpt_more')) {
     remove_filter('get_the_excerpt', 'twentytwentyfour_excerpt_more');
 }
@@ -39,9 +39,9 @@ if (function_exists('twentytwenty_excerpt_more')) {
     remove_filter('get_the_excerpt', 'twentytwenty_excerpt_more');
 }
 
-// ============================================================================
-// FUNCTION: Generate clean, safe excerpt
-// ============================================================================
+/* -------------------------------------------------
+ * FUNCTION: Generate clean, safe excerpt
+ * -------------------------------------------------*/
 /**
  * Return a clean excerpt for a given post ID, with safe fallbacks.
  *
@@ -50,17 +50,20 @@ if (function_exists('twentytwenty_excerpt_more')) {
  * @param string $more More symbol or string.
  * @return string Clean trimmed excerpt.
  */
-function ec_get_clean_excerpt($post_id = null, int $length = 30, string $more = '…'): string
+function satori_events_get_clean_excerpt(?int $post_id = null, int $length = 30, string $more = '…'): string
 {
     $post = $post_id ? get_post($post_id) : get_post();
-    if (!$post instanceof \WP_Post) return '';
+    if (!$post instanceof \WP_Post) {
+        return '';
+    }
 
     // Use manually set excerpt if available
     $excerpt = has_excerpt($post)
         ? $post->post_excerpt
         : wp_strip_all_tags(strip_shortcodes($post->post_content));
 
-    $final_length = apply_filters('ec_excerpt_length', $length);
+    $final_length = apply_filters('satori_events_excerpt_length', $length);
+
     $trimmed = wp_trim_words($excerpt, $final_length, $more);
 
     /**
@@ -71,5 +74,5 @@ function ec_get_clean_excerpt($post_id = null, int $length = 30, string $more = 
      * @param int      $final_length Number of words.
      * @param string   $more         More symbol.
      */
-    return apply_filters('ec_get_clean_excerpt', $trimmed, $post, $final_length, $more);
+    return apply_filters('satori_events_get_clean_excerpt', $trimmed, $post, $final_length, $more);
 }

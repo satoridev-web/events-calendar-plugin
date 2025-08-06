@@ -8,7 +8,7 @@
 /* ================================
    General Layout Container
    ================================ */
-   .ec-event-wrapper {
+   .satori-eventss-wrapper {
     max-width: 800px;
     margin: 2rem auto;
     padding: 1.5rem;
@@ -22,7 +22,7 @@
   /* ================================
      Event Title
      ================================ */
-  .ec-event-title {
+  .satori-events-title {
     margin-bottom: 1rem;
     font-size: 2rem;
     font-weight: 600;
@@ -33,14 +33,14 @@
   /* ================================
      Featured Image
      ================================ */
-  .ec-event-thumbnail,
-  .ec-event-featured-image {
+  .satori-events-thumbnail,
+  .satori-events-featured-image {
     margin: 1.5rem 0;
     text-align: center;
   }
   
-  .ec-event-thumbnail img,
-  .ec-event-featured-image img {
+  .satori-events-thumbnail img,
+  .satori-events-featured-image img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
@@ -50,23 +50,23 @@
   /* ================================
      Event Meta Section
      ================================ */
-  .ec-event-meta,
-  .ec-event-details {
+  .satori-events-meta,
+  .satori-events-details {
     margin-top: 1.5rem;
     border-top: 1px solid #eee;
     padding-top: 1rem;
   }
   
-  .ec-event-meta p,
-  .ec-event-details p {
+  .satori-events-meta p,
+  .satori-events-details p {
     display: flex;
     align-items: baseline;
     gap: 0.5em;
     margin: 0.25em 0;
   }
   
-  .ec-event-meta strong,
-  .ec-event-details strong {
+  .satori-events-meta strong,
+  .satori-events-details strong {
     min-width: 115px;
     font-weight: 600;
     flex-shrink: 0;
@@ -76,7 +76,7 @@
   /* ================================
      Main Content Section
      ================================ */
-  .ec-event-content {
+  .satori-events-content {
     margin-top: 2rem;
     color: #333;
     font-size: 1rem;
@@ -85,8 +85,8 @@
   /* ================================
      Form Success / Error Notices
      ================================ */
-  .ec-success,
-  .ec-error {
+  .satori-events-success,
+  .satori-events-error {
     margin-top: 1rem;
     padding: 1rem 1.25rem;
     border-radius: 6px;
@@ -95,13 +95,13 @@
     border-left: 5px solid;
   }
   
-  .ec-success {
+  .satori-events-success {
     background-color: #e6ffed;
     border-color: #38a169;
     color: #22543d;
   }
   
-  .ec-error {
+  .satori-events-error {
     background-color: #ffe6e6;
     border-color: #e53e3e;
     color: #742a2a;
@@ -110,13 +110,13 @@
   /* ================================
      Form Layout (Basic Styling)
      ================================ */
-  .ec-event-submission-form *,
-  .ec-event-submission-form *::before,
-  .ec-event-submission-form *::after {
+  .satori-events-submission-form *,
+  .satori-events-submission-form *::before,
+  .satori-events-submission-form *::after {
     box-sizing: border-box;
   }
   
-  .ec-event-submission-form {
+  .satori-events-submission-form {
     max-width: 700px;
     margin: 2rem auto;
     padding: 1.5rem;
@@ -125,21 +125,21 @@
     border-radius: 8px;
   }
   
-  .ec-event-submission-form p {
+  .satori-events-submission-form p {
     margin-bottom: 1.25rem;
   }
   
-  .ec-event-submission-form label {
+  .satori-events-submission-form label {
     font-weight: 500;
     color: #222;
   }
   
-  .ec-event-submission-form input[type="text"],
-  .ec-event-submission-form input[type="date"],
-  .ec-event-submission-form input[type="time"],
-  .ec-event-submission-form input[type="file"],
-  .ec-event-submission-form select,
-  .ec-event-submission-form textarea {
+  .satori-events-submission-form input[type="text"],
+  .satori-events-submission-form input[type="date"],
+  .satori-events-submission-form input[type="time"],
+  .satori-events-submission-form input[type="file"],
+  .satori-events-submission-form select,
+  .satori-events-submission-form textarea {
     width: 100%;
     padding: 0.6rem;
     font-size: 1rem;
@@ -151,7 +151,7 @@
   /* ================================
      Submit Button
      ================================ */
-  .ec-event-submission-form button[type="submit"] {
+  .satori-events-submission-form button[type="submit"] {
     display: block;
     width: 100%;
     margin: 2.5rem auto 0;
@@ -164,7 +164,7 @@
     cursor: pointer;
   }
   
-  .ec-event-submission-form button[type="submit"]:hover {
+  .satori-events-submission-form button[type="submit"]:hover {
     background-color: #005177;
   }
   
@@ -172,18 +172,18 @@
      Responsive Tweak for Mobile
      ================================ */
   @media (max-width: 600px) {
-    .ec-event-meta p,
-    .ec-event-details p {
+    .satori-events-meta p,
+    .satori-events-details p {
       flex-direction: column;
       align-items: flex-start;
     }
   
-    .ec-event-meta strong,
-    .ec-event-details strong {
+    .satori-events-meta strong,
+    .satori-events-details strong {
       min-width: auto;
     }
   
-    .ec-event-submission-form {
+    .satori-events-submission-form {
       padding: 1rem;
     }
   }
@@ -191,14 +191,14 @@
   /* ================================
      View Toggle Buttons
      ================================ */
-  .ec-view-toggle {
+  .satori-events-view-toggle {
     display: flex;
     gap: 0.5rem;
     align-self: flex-end;
     margin-left: auto;
   }
   
-  .ec-toggle-button {
+  .satori-events-toggle-button {
     padding: 0.5rem 1rem;
     border: 1px solid #ccc;
     background-color: #f7f7f7;
@@ -210,12 +210,12 @@
     cursor: pointer;
   }
   
-  .ec-toggle-button:hover {
+  .satori-events-toggle-button:hover {
     background-color: #0073aa;
     color: #fff;
   }
   
-  .ec-toggle-button.active {
+  .satori-events-toggle-button.active {
     background-color: #0073aa;
     color: #fff;
     font-weight: 600;
@@ -226,13 +226,13 @@
   /* ================================
      List View Layout
      ================================ */
-  .ec-archive-list {
+  .satori-events-archive-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
   
-  .ec-list-card {
+  .satori-events-list-card {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -244,7 +244,7 @@
     align-items: flex-start;
   }
   
-  .ec-list-date {
+  .satori-events-list-date {
     font-size: 1.1rem;
     font-weight: bold;
     color: #0073aa;
@@ -256,25 +256,25 @@
     flex-shrink: 0;
   }
   
-  .ec-list-content {
+  .satori-events-list-content {
     flex: 1;
   }
   
-  .ec-list-title {
+  .satori-events-list-title {
     font-size: 1.2rem;
     margin: 0 0 0.3rem 0;
   }
   
-  .ec-list-title a {
+  .satori-events-list-title a {
     color: #222;
     text-decoration: none;
   }
   
-  .ec-list-title a:hover {
+  .satori-events-list-title a:hover {
     color: #0073aa;
   }
   
-  .ec-list-excerpt {
+  .satori-events-list-excerpt {
     font-size: 0.95rem;
     color: #555;
   }
@@ -283,17 +283,17 @@
      Responsive Adjustments for List View
      ================================ */
   @media (max-width: 600px) {
-    .ec-list-card {
+    .satori-events-list-card {
       flex-direction: column;
       align-items: flex-start;
     }
   
-    .ec-list-date {
+    .satori-events-list-date {
       margin-bottom: 0.5rem;
       width: 100%;
     }
   
-    .ec-view-toggle {
+    .satori-events-view-toggle {
       flex-direction: column;
       gap: 0.5rem;
     }
@@ -302,13 +302,13 @@
   /* ================================
      Event Archive Grid Layout
      ================================ */
-  .ec-archive-wrapper {
+  .satori-events-archive-wrapper {
     max-width: 1200px;
     margin: 3rem auto;
     padding: 0 1rem;
   }
   
-  .ec-archive-title {
+  .satori-events-archive-title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 2rem;
@@ -318,7 +318,7 @@
 /* ================================
    Grid Layout Consistent Width
    ================================ */
-   .ec-archive-grid {
+   .satori-events-archive-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
@@ -332,7 +332,7 @@
   /* ================================
      Event Card
      ================================ */
-  .ec-archive-card {
+  .satori-events-archive-card {
     position: relative;
     background: #fff;
     border-radius: 10px;
@@ -342,13 +342,13 @@
     flex-direction: column;
   }
   
-  .ec-archive-image {
+  .satori-events-archive-image {
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
   }
   
-  .ec-archive-image img {
+  .satori-events-archive-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -358,7 +358,7 @@
   /* ================================
      Date Ribbon
      ================================ */
-  .ec-event-date-ribbon {
+  .satori-events-date-ribbon {
     position: absolute;
     top: 0;
     left: 0;
@@ -373,7 +373,7 @@
   /* ================================
      Card Content
      ================================ */
-  .ec-archive-card-content {
+  .satori-events-archive-card-content {
     padding: 1.25rem;
     flex: 1;
     display: flex;
@@ -381,7 +381,7 @@
     justify-content: space-between;
   }
   
-  .ec-archive-card-title {
+  .satori-events-archive-card-title {
     text-align: center;
     font-size: 1.25rem;
     font-weight: 600;
@@ -389,7 +389,7 @@
     color: #222;
   }
   
-  .ec-event-excerpt {
+  .satori-events-excerpt {
     text-align: center;
     font-size: 0.95rem;
     color: #555;
@@ -399,24 +399,24 @@
   /* ================================
      Event Tags
      ================================ */
-  .ec-event-tags {
+  .satori-events-tags {
     margin-top: 1rem;
     text-align: center;
   }
   
-  .ec-event-tags span {
+  .satori-events-tags span {
     margin: 0.25rem;
     color: #aaaaaa;
   }
   
-  .ec-event-card-meta {
+  .satori-events-card-meta {
     text-align: center;
     font-size: 0.9rem;
     color: #0073aa;
     margin-bottom: 0.75rem;
   }
   
-  .ec-event-read-more {
+  .satori-events-read-more {
     display: inline-block;
     margin: 1.5rem auto 0;
     text-decoration: none;
@@ -426,14 +426,14 @@
     transition: color 0.2s ease;
   }
   
-  .ec-event-read-more:hover {
+  .satori-events-read-more:hover {
     color: #005177;
   }
   
   /* ================================
      Read More Button (Duplicate? Included for safety)
      ================================ */
-  .ec-event-read-more {
+  .satori-events-read-more {
     margin-top: auto;
     display: inline-block;
     margin-top: 1.5rem;
@@ -443,14 +443,14 @@
     transition: color 0.2s ease;
   }
   
-  .ec-event-read-more:hover {
+  .satori-events-read-more:hover {
     color: #005177;
   }
   
   /* ================================
      Archive Filters and Search + View Toggles Container
      ================================ */
-  .ec-event-filters-wrapper {
+  .satori-events-filters-wrapper {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -464,7 +464,7 @@
   /* ================================
      Archive Filters
      ================================ */
-  .ec-event-filters {
+  .satori-events-filters {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -476,21 +476,21 @@
   }
   
   /* Each filter block and search aligned vertically */
-  .ec-filter-group {
+  .satori-events-filter-group {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 180px; /* Consistent width */
   }
   
-  .ec-filter-group label {
+  .satori-events-filter-group label {
     font-weight: 500;
     margin-bottom: 0.3rem;
     color: #333;
     font-size: 0.9rem;
   }
   
-  .ec-filter-group select {
+  .satori-events-filter-group select {
     width: 180px;
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
@@ -506,14 +506,14 @@
   }
   
   /* Remove native dropdown arrow in IE */
-  .ec-filter-group select::-ms-expand {
+  .satori-events-filter-group select::-ms-expand {
     display: none;
   }
   
 /* ================================
    Search Input Styling
    ================================ */
-   .ec-filter-search {
+   .satori-events-filter-search {
     position: relative; /* For positioning the clear button */
     display: flex;
     flex-direction: column;
@@ -521,8 +521,8 @@
     flex: 1 1 auto; /* Allow it to stretch nicely if needed */
   }
   
-  .ec-filter-search input[type="search"],
-  .ec-filter-search input[type="text"] {
+  .satori-events-filter-search input[type="search"],
+  .satori-events-filter-search input[type="text"] {
     width: 100%;
     padding: 0.4rem 2.4rem 0.4rem 0.8rem; /* Add right padding for 'X' button */
     font-size: 0.9rem;
@@ -534,7 +534,7 @@
   /* ================================
      Clear Search "X" Button
      ================================ */
-  .ec-search-clear {
+  .satori-events-search-clear {
     position: absolute;
     top: 50%;
     right: 0.6rem;
@@ -548,18 +548,18 @@
     padding: 0;
   }
   
-  .ec-search-clear:hover {
+  .satori-events-search-clear:hover {
     color: #0073aa;
   }  
 
-  .ec-search-clear {
+  .satori-events-search-clear {
     display: none;
   }  
   
   /* ================================
      Filter Button
      ================================ */
-  .ec-filter-button {
+  .satori-events-filter-button {
     padding: 0.6rem 1.2rem;
     font-size: 1rem;
     border: none;
@@ -571,19 +571,19 @@
     margin-top: 1rem;
   }
   
-  .ec-filter-button:hover {
+  .satori-events-filter-button:hover {
     background-color: #005177;
   }
   
   /* ================================
      View Toggle Buttons
      ================================ */
-  .ec-view-toggle {
+  .satori-events-view-toggle {
     display: flex;
     gap: 1rem;
   }
   
-  .ec-toggle-button {
+  .satori-events-toggle-button {
     padding: 0.4rem 0.9rem;
     border: 1px solid #ccc;
     background-color: #f7f7f7;
@@ -599,12 +599,12 @@
     gap: 0.3rem;
   }
   
-  .ec-toggle-button:hover {
+  .satori-events-toggle-button:hover {
     background-color: #0073aa;
     color: #fff;
   }
   
-  .ec-toggle-button.active {
+  .satori-events-toggle-button.active {
     background-color: #0073aa;
     color: #fff;
     font-weight: 600;
@@ -616,26 +616,26 @@
      Responsive Filter and Controls Adjustments
      ================================ */
   @media (max-width: 900px) {
-    .ec-event-filters-wrapper {
+    .satori-events-filters-wrapper {
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
     }
   
-    .ec-event-filters,
-    .ec-filter-search,
-    .ec-filter-group {
+    .satori-events-filters,
+    .satori-events-filter-search,
+    .satori-events-filter-group {
       min-width: 150px;
       margin-bottom: 0.75rem;
     }
   
-    .ec-filter-group select,
-    .ec-filter-search input[type="search"],
-    .ec-filter-search input[type="text"] {
+    .satori-events-filter-group select,
+    .satori-events-filter-search input[type="search"],
+    .satori-events-filter-search input[type="text"] {
       width: 150px;
     }
   
-    .ec-view-toggle {
+    .satori-events-view-toggle {
       width: 100%;
       justify-content: center;
       margin-top: 0.5rem;
@@ -643,33 +643,33 @@
   }
   
   @media (max-width: 600px) {
-    .ec-event-filters-wrapper {
+    .satori-events-filters-wrapper {
       flex-direction: column;
       align-items: stretch;
       gap: 0.5rem;
     }
   
-    .ec-event-filters {
+    .satori-events-filters {
       flex-direction: column;
       flex-wrap: nowrap;
       gap: 1rem;
       width: 100%;
     }
 
-    .ec-filter-search,
-    .ec-filter-group {
+    .satori-events-filter-search,
+    .satori-events-filter-group {
       width: 100%;
       min-width: 100%;
       margin-bottom: 0;
     }
   
-    .ec-filter-group select,
-    .ec-filter-search input[type="search"],
-    .ec-filter-search input[type="text"] {
+    .satori-events-filter-group select,
+    .satori-events-filter-search input[type="search"],
+    .satori-events-filter-search input[type="text"] {
       width: 100%;
     }
   
-    .ec-view-toggle {
+    .satori-events-view-toggle {
       justify-content: center;
       width: 100%;
       margin-top: 0.75rem;
@@ -680,12 +680,12 @@
   /* ================================
      Event Archive Pagination
      ================================ */
-  .ec-pagination {
+  .satori-events-pagination {
     margin-top: 3rem;
     text-align: center;
   }
   
-  .ec-pagination .page-numbers {
+  .satori-events-pagination .page-numbers {
     display: inline-block;
     margin: 0 0.3rem;
     padding: 0.5rem 0.9rem;
@@ -696,13 +696,13 @@
     font-size: 0.95rem;
   }
   
-  .ec-pagination .page-numbers.current {
+  .satori-events-pagination .page-numbers.current {
     background: #0073aa;
     color: #fff;
     font-weight: 600;
   }
   
-  .ec-pagination .page-numbers:hover {
+  .satori-events-pagination .page-numbers:hover {
     background: #005177;
     color: #fff;
   }

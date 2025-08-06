@@ -10,18 +10,36 @@
 
 defined('ABSPATH') || exit;
 
+/* -------------------------------------------------
+ * Utility: Conditional Logging
+ * -------------------------------------------------*/
+
+/**
+ * Log messages to error log if debug mode is enabled.
+ *
+ * @param string $message The message to log.
+ * @return void
+ */
+function satori_events_log(string $message): void
+{
+    if (get_option('satori_events_debug_mode') === '1') {
+        error_log('[Satori Events] ' . $message);
+    }
+}
+
 // =============================================================================
 // Locate template files in child theme, parent theme, or plugin fallback.
-// Developers may override using the 'ec_template_path' filter.
+// Developers may override using the 'satori_events_template_path' filter.
 // Caches located templates during request for performance.
 // =============================================================================
+
 /**
  * Locate a template file.
  *
  * @param string $template_name Filename of the template to locate.
  * @return string|false Full path to the template or false if not found.
  */
-function ec_locate_template(string $template_name): string|false
+function satori_events_locate_template(string $template_name): string|false
 {
     static $cache = [];
 
@@ -37,7 +55,10 @@ function ec_locate_template(string $template_name): string|false
 
     foreach ($paths as $path) {
         if (file_exists($path)) {
-            $cache[$template_name] = apply_filters('ec_template_path', $path, $template_name);
+            $cache[$template_name] = apply_filters('satori_events_template_path', $path, $template_name);
+
+            satori_events_log("Template located: {$cache[$template_name]}");
+
             return $cache[$template_name];
         }
     }
@@ -50,7 +71,9 @@ function ec_locate_template(string $template_name): string|false
      *
      * @param string $template_name Name of the missing template.
      */
-    do_action('ec_template_missing', $template_name);
+    do_action('satori_events_template_missing', $template_name);
+
+    satori_events_log("Template missing: {$template_name}");
 
     return false;
 }
@@ -59,31 +82,34 @@ function ec_locate_template(string $template_name): string|false
 // Intercept template loading for single event posts and event archive.
 // Allows theme/plugin overrides.
 // =============================================================================
+
 /**
  * Load custom templates for event post types.
  *
  * @param string $template The path to the current template.
  * @return string Modified template path if override found, otherwise original.
  */
-function ec_load_event_templates(string $template): string
+function satori_events_load_event_templates(string $template): string
 {
     if (is_singular('event')) {
-        $custom_single = ec_locate_template('ec-single-event.php');
+        $custom_single = satori_events_locate_template('satori-events-single-event.php');
         if ($custom_single) {
+            satori_events_log("Using custom single event template: $custom_single");
             return $custom_single;
         }
     }
 
     if (is_post_type_archive('event')) {
-        $custom_archive = ec_locate_template('ec-archive-event.php');
+        $custom_archive = satori_events_locate_template('satori-events-archive-event.php');
         if ($custom_archive) {
+            satori_events_log("Using custom event archive template: $custom_archive");
             return $custom_archive;
         }
     }
 
     return $template;
 }
-add_filter('template_include', 'ec_load_event_templates');
+add_filter('template_include', 'satori_events_load_event_templates');
 
 // =============================================================================
 // Customize the main query for the 'event' archive:
@@ -91,15 +117,16 @@ add_filter('template_include', 'ec_load_event_templates');
 // - Sorting via ?sort= parameter
 // - Taxonomy filtering via ?event_type=
 // =============================================================================
+
 /**
  * Modify the main query for event archive page.
  *
  * @param \WP_Query $query The WP_Query instance (passed by reference).
  * @return void
  */
-function ec_set_event_archive_query(\WP_Query $query): void
+function satori_events_set_event_archive_query(\WP_Query $query): void
 {
-    if (! is_admin() && $query->is_main_query() && is_post_type_archive('event')) {
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('event')) {
 
         // -------------------------------------------------------------------------
         // Pagination limit (default: 3)
@@ -114,7 +141,7 @@ function ec_set_event_archive_query(\WP_Query $query): void
         switch ($sort) {
             case 'date_desc':
                 $query->set('orderby', 'meta_value');
-                $query->set('meta_key', '_ec_event_date');
+                $query->set('meta_key', '_satori_events_date');
                 $query->set('order', 'DESC');
                 break;
 
@@ -131,7 +158,7 @@ function ec_set_event_archive_query(\WP_Query $query): void
             case 'date_asc':
             default:
                 $query->set('orderby', 'meta_value');
-                $query->set('meta_key', '_ec_event_date');
+                $query->set('meta_key', '_satori_events_date');
                 $query->set('order', 'ASC');
                 break;
         }
@@ -139,7 +166,7 @@ function ec_set_event_archive_query(\WP_Query $query): void
         // -------------------------------------------------------------------------
         // Taxonomy filter via URL parameter ?event_type=
         // -------------------------------------------------------------------------
-        if (! empty($_GET['event_type'])) {
+        if (!empty($_GET['event_type'])) {
             $query->set('tax_query', [
                 [
                     'taxonomy' => 'event_type',
@@ -149,10 +176,12 @@ function ec_set_event_archive_query(\WP_Query $query): void
             ]);
         }
 
+        satori_events_log('Event archive query args: ' . print_r($query->query_vars, true));
+
         // -------------------------------------------------------------------------
         // Hook for further customization by developers
         // -------------------------------------------------------------------------
-        do_action('ec_modify_event_archive_query', $query);
+        do_action('satori_events_modify_event_archive_query', $query);
     }
 }
-add_action('pre_get_posts', 'ec_set_event_archive_query');
+add_action('pre_get_posts', 'satori_events_set_event_archive_query');

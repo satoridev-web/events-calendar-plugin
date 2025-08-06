@@ -1,14 +1,13 @@
 <?php
-// Exit if accessed directly.
+
 defined('ABSPATH') || exit;
 
-// --------------------------------------------------
-// Register Custom Post Type: Event
-// --------------------------------------------------
-function ec_register_event_post_type()
+/* -------------------------------------------------
+ * Register Custom Post Type: Event
+ * -------------------------------------------------*/
+function satori_events_register_event_post_type(): void
 {
-    // Labels for Event CPT.
-    $labels = array(
+    $labels = [
         'name'                  => __('Events', 'events-calendar-plugin'),
         'singular_name'         => __('Event', 'events-calendar-plugin'),
         'menu_name'             => __('Events', 'events-calendar-plugin'),
@@ -22,24 +21,22 @@ function ec_register_event_post_type()
         'search_items'          => __('Search Events', 'events-calendar-plugin'),
         'not_found'             => __('No events found.', 'events-calendar-plugin'),
         'not_found_in_trash'    => __('No events found in Trash.', 'events-calendar-plugin'),
-    );
+    ];
 
-    // Arguments for Event CPT.
-    $args = array(
+    $args = [
         'labels'                => $labels,
         'public'                => true,
         'has_archive'           => true,
-        'rewrite'               => array('slug' => 'events'),
+        'rewrite'               => ['slug' => 'events'],
         'menu_icon'             => 'dashicons-calendar-alt',
-        'supports'              => array('title', 'editor', 'thumbnail'),
+        'supports'              => ['title', 'editor', 'thumbnail'],
         'show_in_rest'          => true, // Enables Gutenberg + REST API support.
-    );
+    ];
 
-    // Register the CPT.
     register_post_type('event', $args);
 }
 
-// --------------------------------------------------
-// Hook CPT registration to 'init'
-// --------------------------------------------------
-add_action('init', 'ec_register_event_post_type');
+/* -------------------------------------------------
+ * Hook CPT registration to 'init'
+ * -------------------------------------------------*/
+add_action('init', 'satori_events_register_event_post_type');
