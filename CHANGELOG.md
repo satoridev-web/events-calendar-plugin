@@ -6,6 +6,35 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.1.0] - 2025-08-06
+
+### Added
+
+- New **SATORI Events Tools** submenu under the WordPress admin, featuring:
+  - **Refresh Metadata**: Regenerates metadata for events.
+  - **Clear Cache**: Clears transient cache (if applicable).
+  - **Debug Mode Toggle**: Enables or disables plugin-specific logging/debug features.
+- AJAX-based interactivity for all admin tools.
+- Capability check: Tools menu visibility restricted to users with the custom `satori_events_tools` capability.
+- Nonce protection added for all AJAX requests to ensure security.
+
+### Files Introduced
+
+- `admin/class-satori-events-tools-page.php`: Renders the Tools admin page, handles form and button UI, and enqueues JS.
+- `includes/ajax/class-satori-events-ajax-handler.php`: Centralized AJAX router for handling backend tools logic.
+- `assets/js/satori-events-ajax.js`: JavaScript file responsible for triggering AJAX requests from the Tools UI.
+
+### Changed
+
+- `satori-events.php`: Registered the new Tools page, enqueued scripts, and initialized AJAX handler.
+
+### Notes
+
+- This update lays the foundation for future admin utilities.
+- All actions are designed to be extensible via hooks and filters.
+
+---
+
 ## [1.0.2-dev] – 2025-07-30
 
 ### Added

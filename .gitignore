@@ -1,40 +1,57 @@
+# -----------------------------------------
 # macOS system files
+# -----------------------------------------
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# VS Code settings
-.vscode/
+# -----------------------------------------
+# IDE and Editor settings
+# -----------------------------------------
+.vscode/                                    # Visual Studio Code
+.idea/                                      # PHPStorm, WebStorm, etc.
+*.iml                                       # IntelliJ project files
+*.swp                                       # Vim swap files
 
-# SCSS cache
+# -----------------------------------------
+# SCSS / CSS build outputs
+# -----------------------------------------
 .sass-cache/
 *.sass-cache/
+assets/css/**/*.css.map                     # Ignore source maps
+assets/css/*.map
+assets/css/main.css                         # Ignore legacy build (if replaced)
+!assets/css/satori-events-main.css          # Keep your new production CSS
+assets/css/satori-events-main-legacy.css    # Optionally ignore (if deprecated)
 
-# Compiled CSS (optional - keep only if you compile main.css separately)
-assets/css/main.css
-assets/css/**/*.css.map
-
-# Node modules (if you're using a build process)
+# -----------------------------------------
+# Node / Build tools (optional)
+# -----------------------------------------
 node_modules/
+npm-debug.log*
+yarn.lock
 
-# Log files
+# -----------------------------------------
+# Logs and temporary files
+# -----------------------------------------
 *.log
-
-# Backup files
 *.bak
 *.tmp
-*.swp
+*~
 
-# PHPStorm or other IDE junk
-.idea/
-*.iml
-
-# Composer dependencies (if used)
+# -----------------------------------------
+# Composer (if added later)
+# -----------------------------------------
 vendor/
+composer.lock
 
-# Ignore uploads or generated media (if applicable)
+# -----------------------------------------
+# Uploads or generated media (if used)
+# -----------------------------------------
 uploads/
 media/
 
+# -----------------------------------------
 # Git itself
+# -----------------------------------------
 .git/
