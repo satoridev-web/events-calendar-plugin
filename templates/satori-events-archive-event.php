@@ -1,4 +1,9 @@
 <?php
+
+// DEBUG MARKER
+error_log('[Satori Events] Template Executed: satori-events-archive-event.php');
+
+
 // Exit if accessed directly
 defined('ABSPATH') || exit;
 

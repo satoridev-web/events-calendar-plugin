@@ -112,36 +112,8 @@ final class Plugin
 
     public function filter_events_archive($query)
     {
-        if (is_admin() || !$query->is_main_query()) return;
-
-        if (is_post_type_archive('event') || is_tax(['event_type', 'event_location'])) {
-            if (!empty($_GET['s'])) {
-                $query->set('s', sanitize_text_field(wp_unslash($_GET['s'])));
-            }
-
-            $tax_query = [];
-
-            if (!empty($_GET['satori_events_category'])) {
-                $tax_query[] = [
-                    'taxonomy' => 'event_type',
-                    'field'    => 'slug',
-                    'terms'    => sanitize_text_field(wp_unslash($_GET['satori_events_category'])),
-                ];
-            }
-
-            if (!empty($_GET['satori_events_location'])) {
-                $tax_query[] = [
-                    'taxonomy' => 'event_location',
-                    'field'    => 'slug',
-                    'terms'    => sanitize_text_field(wp_unslash($_GET['satori_events_location'])),
-                ];
-            }
-
-            if (!empty($tax_query)) {
-                $query->set('tax_query', $tax_query);
-            }
-
-            $query->set('posts_per_page', 3);
+        if (function_exists('satori_events_set_event_archive_query')) {
+            satori_events_set_event_archive_query($query);
         }
     }
 

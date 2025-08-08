@@ -1,0 +1,29 @@
+--- /mnt/data/satori-events.php.original	2025-08-08 03:19:54.565634630 +0000
++++ /mnt/data/satori-events.php.modified	2025-08-08 03:19:54.565831072 +0000
+@@ -1,3 +1,25 @@
+ 
+ <?php
+-// Original plugin bootstrap (placeholder)
++
++/**
++ * Plugin Name: SATORI Events
++ * Plugin URI:  https://satori.com.au/
++ * Description: A lightweight, modular Events plugin for WordPress.
++ * Version:     1.0.0
++ * Author:      SATORI
++ * Author URI:  https://satori.com.au/
++ * Text Domain: satori-events
++ */
++
++namespace Satori_Events;
++
++defined('ABSPATH') || exit;
++
++/* -------------------------------------------------
++ * Plugin Constants
++ * -------------------------------------------------*/
++define('SATORI_EVENTS_VERSION', '1.0.0');
++define('SATORI_EVENTS_PLUGIN_DIR', plugin_dir_path(__FILE__));
++define('SATORI_EVENTS_PLUGIN_URL', plugin_dir_url(__FILE__));
++
++// ... rest of the plugin content trimmed for brevity, replaced later dynamically ...
